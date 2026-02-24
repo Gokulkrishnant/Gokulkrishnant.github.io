@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gokul Krishnan T — Tech Stack</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #060a12;
+    --surface: #0d1320;
+    --card: #111827;
+    --border: #1e2d45;
+    --sf-blue: #00A1E0;
+    --sf-cloud: #032D60;
+    --accent: #00c7ff;
+    --gold: #f5a623;
+    --green: #00d68f;
+    --text: #e8edf5;
+    --muted: #5a7290;
+    --glow: rgba(0,199,255,0.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid bg */
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(rgba(0,161,224,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,161,224,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrapper { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:48px 24px 80px; }
+
+  /* Header */
+  .header { text-align:center; margin-bottom:56px; }
+  .header-tag {
+    display:inline-block;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--accent);
+    letter-spacing:3px;
+    text-transform:uppercase;
+    border:1px solid rgba(0,199,255,0.3);
+    padding:5px 14px;
+    border-radius:2px;
+    margin-bottom:20px;
+    animation: fadeIn 0.6s ease;
+  }
+  .header h1 {
+    font-size:clamp(32px,6vw,52px);
+    font-weight:800;
+    line-height:1.05;
+    letter-spacing:-1.5px;
+    animation: slideUp 0.7s ease;
+  }
+  .header h1 span { color:var(--accent); }
+  .header p {
+    margin-top:12px;
+    color:var(--muted);
+    font-size:14px;
+    font-family:'Space Mono', monospace;
+    animation: slideUp 0.8s ease;
+  }
+
+  /* Stat bar */
+  .stat-bar {
+    display:flex; gap:0; margin-bottom:48px;
+    border:1px solid var(--border);
+    border-radius:8px; overflow:hidden;
+    animation: fadeIn 1s ease;
+  }
+  .stat {
+    flex:1; padding:18px 12px; text-align:center;
+    border-right:1px solid var(--border);
+    background:var(--surface);
+    transition:background 0.2s;
+  }
+  .stat:last-child { border-right:none; }
+  .stat:hover { background:var(--card); }
+  .stat-val {
+    font-size:26px; font-weight:800; color:var(--accent);
+    font-family:'Space Mono', monospace;
+    display:block;
+  }
+  .stat-label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; margin-top:4px; }
+
+  /* Category filter */
+  .filters {
+    display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px;
+    animation: fadeIn 0.9s ease;
+  }
+  .filter-btn {
+    font-family:'Space Mono', monospace;
+    font-size:10px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    border:1px solid var(--border);
+    background:transparent;
+    color:var(--muted);
+    padding:7px 16px;
+    border-radius:2px;
+    cursor:pointer;
+    transition:all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    border-color:var(--accent);
+    color:var(--accent);
+    background:rgba(0,199,255,0.06);
+  }
+  .filter-btn.active { font-weight:700; }
+
+  /* Stack grid */
+  .stack-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap:12px;
+  }
+
+  .tech-card {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:18px 20px;
+    cursor:pointer;
+    transition:all 0.25s cubic-bezier(0.23,1,0.32,1);
+    position:relative;
+    overflow:hidden;
+    animation: cardIn 0.5s ease both;
+  }
+  .tech-card::before {
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:2px;
+    background:linear-gradient(90deg, var(--accent), transparent);
+    opacity:0;
+    transition:opacity 0.25s;
+  }
+  .tech-card:hover {
+    border-color:rgba(0,199,255,0.4);
+    transform:translateY(-3px);
+    box-shadow:0 12px 40px rgba(0,199,255,0.1);
+  }
+  .tech-card:hover::before { opacity:1; }
+  .tech-card.hidden { display:none; }
+
+  .card-top { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+  .card-icon {
+    width:36px; height:36px; border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:18px; flex-shrink:0;
+  }
+  .card-name { font-size:14px; font-weight:700; color:var(--text); }
+  .card-cat {
+    font-family:'Space Mono', monospace;
+    font-size:9px;
+    color:var(--muted);
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+  }
+
+  /* Proficiency bar */
+  .prof-bar {
+    height:3px;
+    background:var(--border);
+    border-radius:2px;
+    margin-top:10px;
+    overflow:hidden;
+  }
+  .prof-fill {
+    height:100%;
+    border-radius:2px;
+    transition:width 0.8s cubic-bezier(0.23,1,0.32,1);
+  }
+
+  .prof-label {
+    display:flex; justify-content:space-between;
+    margin-top:6px;
+    font-family:'Space Mono', monospace;
+    font-size:9px;
+    color:var(--muted);
+  }
+
+  /* Category colors */
+  .cat-platform .card-icon { background:rgba(0,161,224,0.15); }
+  .cat-platform .prof-fill { background: linear-gradient(90deg, #00A1E0, #00c7ff); }
+  .cat-platform .card-name { color:#5bc8f5; }
+
+  .cat-ai .card-icon { background:rgba(245,166,35,0.15); }
+  .cat-ai .prof-fill { background: linear-gradient(90deg, #f5a623, #ffd166); }
+  .cat-ai .card-name { color:#ffc145; }
+
+  .cat-integration .card-icon { background:rgba(0,214,143,0.15); }
+  .cat-integration .prof-fill { background: linear-gradient(90deg, #00d68f, #5fffcc); }
+  .cat-integration .card-name { color:#00d68f; }
+
+  .cat-dev .card-icon { background:rgba(162,105,255,0.15); }
+  .cat-dev .prof-fill { background: linear-gradient(90deg, #a269ff, #c9a6ff); }
+  .cat-dev .card-name { color:#c4a0ff; }
+
+  .cat-cloud .card-icon { background:rgba(255,107,107,0.15); }
+  .cat-cloud .prof-fill { background: linear-gradient(90deg, #ff6b6b, #ff9f9f); }
+  .cat-cloud .card-name { color:#ff8e8e; }
+
+  /* Certs section */
+  .section-title {
+    font-family:'Space Mono', monospace;
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:52px 0 20px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .section-title::after {
+    content:'';flex:1;height:1px;background:var(--border);
+  }
+
+  .certs-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:10px; }
+  .cert-pill {
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:4px;
+    padding:12px 16px;
+    display:flex; align-items:center; gap:10px;
+    transition:all 0.2s;
+  }
+  .cert-pill:hover { border-color:var(--gold); background:rgba(245,166,35,0.05); }
+  .cert-dot { width:8px; height:8px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+  .cert-name { font-size:12px; font-weight:600; color:var(--text); }
+
+  /* Animations */
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes slideUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes cardIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+  /* Tooltip */
+  .tooltip {
+    position:fixed;
+    background:#1e2d45;
+    border:1px solid var(--accent);
+    border-radius:6px;
+    padding:10px 14px;
+    font-size:12px;
+    color:var(--text);
+    pointer-events:none;
+    opacity:0;
+    transition:opacity 0.15s;
+    max-width:200px;
+    z-index:100;
+    font-family:'Space Mono', monospace;
+    line-height:1.5;
+  }
+  .tooltip.visible { opacity:1; }
+
+  /* Footer */
+  .footer {
+    margin-top:64px;
+    text-align:center;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    padding-top:24px;
+  }
+  .footer a { color:var(--accent); text-decoration:none; }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <div class="header">
+    <div class="header-tag">// tech stack</div>
+    <h1>Gokul <span>Krishnan</span> T</h1>
+    <p>salesforce_developer · coimbatore, india · 2.5 yrs exp</p>
+  </div>
+
+  <div class="stat-bar">
+    <div class="stat">
+      <span class="stat-val" data-count="8">0</span>
+      <div class="stat-label">Certifications</div>
+    </div>
+    <div class="stat">
+      <span class="stat-val" data-count="478">0</span>
+      <div class="stat-label">Trailhead Badges</div>
+    </div>
+    <div class="stat">
+      <span class="stat-val" data-count="220">0</span>
+      <div class="stat-label">K+ Points</div>
+    </div>
+    <div class="stat">
+      <span class="stat-val" data-count="3">0</span>
+      <div class="stat-label">Companies</div>
+    </div>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="platform">Platform</button>
+    <button class="filter-btn" data-filter="ai">AI & Agents</button>
+    <button class="filter-btn" data-filter="integration">Integrations</button>
+    <button class="filter-btn" data-filter="cloud">Clouds</button>
+    <button class="filter-btn" data-filter="dev">Dev Tools</button>
+  </div>
+
+  <div class="stack-grid" id="stackGrid"></div>
+
+  <div class="section-title">certifications</div>
+  <div class="certs-grid" id="certsGrid"></div>
+
+  <div class="footer">
+    <p>📩 <a href="mailto:gokulkrishnant99@gmail.com">gokulkrishnant99@gmail.com</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/gokulkrishnant/" target="_blank">LinkedIn</a> &nbsp;·&nbsp; Trailhead Ranger</p>
+  </div>
+
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const stack = [
+  // Platform
+  { name:"Apex", cat:"platform", icon:"⚙️", prof:95, yrs:"2.5yr", tip:"Triggers, Batch, Async, REST Callouts, SOLID principles" },
+  { name:"LWC", cat:"platform", icon:"⚡", prof:92, yrs:"2.5yr", tip:"Mobile-responsive components, SLDS, Event handling, Parent-Child" },
+  { name:"SOQL / SOSL", cat:"platform", icon:"🔍", prof:90, yrs:"2.5yr", tip:"Optimized queries, relationships, governor limits awareness" },
+  { name:"Flows & Triggers", cat:"platform", icon:"🔄", prof:93, yrs:"2.5yr", tip:"Screen flows, Scheduled flows, Record-triggered, Subflows" },
+  { name:"Platform Events", cat:"platform", icon:"📡", prof:80, yrs:"1.5yr", tip:"Event-driven architecture, pub/sub messaging on Salesforce" },
+  { name:"Salesforce Security", cat:"platform", icon:"🔐", prof:88, yrs:"2yr", tip:"Profiles, Permission Sets, Sharing Rules, OWD, Field-level security" },
+
+  // AI & Agents
+  { name:"Agentforce", cat:"ai", icon:"🤖", prof:85, yrs:"1yr", tip:"Topics, Instructions, Flows, Chatbot with guided conversations" },
+  { name:"Prompt Builder", cat:"ai", icon:"✨", prof:82, yrs:"1yr", tip:"Template-based prompts, dynamic grounding, Apex integration" },
+  { name:"OpenAI GPT API", cat:"ai", icon:"🧠", prof:80, yrs:"1yr", tip:"GPT-3.5 integration via Named Credentials, voice TTS/STT" },
+  { name:"Data Cloud", cat:"ai", icon:"☁️", prof:75, yrs:"0.5yr", tip:"Unified data profiles, segmentation, real-time activation" },
+  { name:"Vibe Coding / Cursor", cat:"ai", icon:"🎯", prof:78, yrs:"0.5yr", tip:"AI-assisted Salesforce development, Agentforce Vibe Coding" },
+
+  // Integrations
+  { name:"REST / SOAP APIs", cat:"integration", icon:"🔗", prof:90, yrs:"2yr", tip:"Callouts, Named Credentials, Connected Apps, OAuth 2.0" },
+  { name:"QuickBooks API", cat:"integration", icon:"💰", prof:82, yrs:"Current", tip:"Bidirectional sync — invoices, payments, financial records" },
+  { name:"Identfo API", cat:"integration", icon:"🪪", prof:80, yrs:"Current", tip:"KYC/identity verification integrated into SF onboarding flows" },
+  { name:"Salesforce CMS", cat:"integration", icon:"📰", prof:85, yrs:"1yr", tip:"Content delivery, Experience Cloud integration, personalization" },
+
+  // Clouds
+  { name:"Sales Cloud", cat:"cloud", icon:"💼", prof:90, yrs:"2yr", tip:"Lead, Opportunity, Account management. Real estate CRM built here" },
+  { name:"Experience Cloud", cat:"cloud", icon:"🌐", prof:88, yrs:"2yr", tip:"Portals, communities, agent + buyer self-service UX" },
+  { name:"Health Cloud", cat:"cloud", icon:"🏥", prof:85, yrs:"1.5yr", tip:"Patient enrollment, prescription modules, care timeline" },
+
+  // Dev Tools
+  { name:"Git / GitHub", cat:"dev", icon:"🌿", prof:88, yrs:"2.5yr", tip:"Branching, PRs, code reviews, version control" },
+  { name:"CI/CD Pipelines", cat:"dev", icon:"🚀", prof:78, yrs:"1.5yr", tip:"Salesforce DX, scratch orgs, pipeline deployment" },
+  { name:"JavaScript / HTML / CSS", cat:"dev", icon:"🖥️", prof:85, yrs:"2.5yr", tip:"Used heavily in LWC, Experience Cloud theming" },
+  { name:"VS Code", cat:"dev", icon:"🛠️", prof:95, yrs:"2.5yr", tip:"Salesforce Extension Pack, debugging, Org Browser" },
+  { name:"Node.js", cat:"dev", icon:"🟢", prof:72, yrs:"1yr", tip:"Tooling, scripts, Salesforce DX automation" },
+];
+
+const certs = [
+  "Platform Developer I (PD1)",
+  "Platform Developer II (PD2)",
+  "JavaScript Developer I",
+  "AI Specialist",
+  "AI Associate",
+  "Data Cloud Consultant",
+  "Salesforce Administrator",
+  "Agentforce Specialist",
+];
+
+// Render stack
+function renderStack(filter) {
+  const grid = document.getElementById('stackGrid');
+  grid.innerHTML = '';
+  const filtered = filter === 'all' ? stack : stack.filter(t => t.cat === filter);
+  filtered.forEach((tech, i) => {
+    const card = document.createElement('div');
+    card.className = `tech-card cat-${tech.cat}`;
+    card.style.animationDelay = `${i * 0.04}s`;
+    card.dataset.tip = tech.tip;
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="card-icon">${tech.icon}</div>
+        <div>
+          <div class="card-name">${tech.name}</div>
+          <div class="card-cat">${tech.cat} · ${tech.yrs}</div>
+        </div>
+      </div>
+      <div class="prof-bar">
+        <div class="prof-fill" style="width:0%" data-width="${tech.prof}%"></div>
+      </div>
+      <div class="prof-label">
+        <span>proficiency</span>
+        <span>${tech.prof}%</span>
+      </div>
+    `;
+    grid.appendChild(card);
+    // Animate bars after paint
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        card.querySelector('.prof-fill').style.width = tech.prof + '%';
+      }, 100 + i * 40);
+    });
+  });
+}
+
+// Render certs
+function renderCerts() {
+  const grid = document.getElementById('certsGrid');
+  certs.forEach(c => {
+    const el = document.createElement('div');
+    el.className = 'cert-pill';
+    el.innerHTML = `<div class="cert-dot"></div><div class="cert-name">${c}</div>`;
+    grid.appendChild(el);
+  });
+}
+
+// Filters
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderStack(btn.dataset.filter);
+  });
+});
+
+// Tooltip
+const tooltip = document.getElementById('tooltip');
+document.addEventListener('mousemove', e => {
+  const card = e.target.closest('.tech-card');
+  if (card && card.dataset.tip) {
+    tooltip.textContent = card.dataset.tip;
+    tooltip.classList.add('visible');
+    tooltip.style.left = (e.clientX + 14) + 'px';
+    tooltip.style.top = (e.clientY - 10) + 'px';
+  } else {
+    tooltip.classList.remove('visible');
+  }
+});
+
+// Counter animation
+function animateCount(el) {
+  const target = parseInt(el.dataset.count);
+  const suffix = el.dataset.count >= 100 ? '' : '';
+  let current = 0;
+  const step = Math.ceil(target / 40);
+  const interval = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = current + (target === 220 ? 'k+' : target === 8 ? 'x' : '+');
+    if (current >= target) clearInterval(interval);
+  }, 30);
+}
+
+// Init
+renderStack('all');
+renderCerts();
+document.querySelectorAll('.stat-val').forEach(el => animateCount(el));
+</script>
+</body>
+</html>
