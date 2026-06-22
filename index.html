@@ -1,468 +1,1030 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Gokul Krishnan T — Tech Stack</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
-<style>
-  :root {
-    --bg: #060a12;
-    --surface: #0d1320;
-    --card: #111827;
-    --border: #1e2d45;
-    --sf-blue: #00A1E0;
-    --sf-cloud: #032D60;
-    --accent: #00c7ff;
-    --gold: #f5a623;
-    --green: #00d68f;
-    --text: #e8edf5;
-    --muted: #5a7290;
-    --glow: rgba(0,199,255,0.15);
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gokul Krishnan T - Salesforce Developer with 3+ years of experience in Apex, LWC, Experience Cloud, Sales Cloud, Health Cloud, Agentforce, integrations, and automation." />
+  <meta name="theme-color" content="#07111f" />
+  <title>Gokul Krishnan T | Salesforce Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --ink: #111827;
+      --muted: #5b6678;
+      --panel: #ffffff;
+      --line: #d9e1ec;
+      --navy: #07111f;
+      --navy-soft: #122033;
+      --blue: #0b7fd3;
+      --teal: #0d9488;
+      --gold: #c88719;
+      --green: #198754;
+      --shadow: 0 18px 55px rgba(9, 22, 41, 0.13);
+      --radius: 8px;
+    }
 
-  * { margin:0; padding:0; box-sizing:border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  /* Grid bg */
-  body::before {
-    content:'';
-    position:fixed; inset:0;
-    background-image:
-      linear-gradient(rgba(0,161,224,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,161,224,0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events:none;
-    z-index:0;
-  }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
 
-  .wrapper { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:48px 24px 80px; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  /* Header */
-  .header { text-align:center; margin-bottom:56px; }
-  .header-tag {
-    display:inline-block;
-    font-family:'Space Mono', monospace;
-    font-size:11px;
-    color:var(--accent);
-    letter-spacing:3px;
-    text-transform:uppercase;
-    border:1px solid rgba(0,199,255,0.3);
-    padding:5px 14px;
-    border-radius:2px;
-    margin-bottom:20px;
-    animation: fadeIn 0.6s ease;
-  }
-  .header h1 {
-    font-size:clamp(32px,6vw,52px);
-    font-weight:800;
-    line-height:1.05;
-    letter-spacing:-1.5px;
-    animation: slideUp 0.7s ease;
-  }
-  .header h1 span { color:var(--accent); }
-  .header p {
-    margin-top:12px;
-    color:var(--muted);
-    font-size:14px;
-    font-family:'Space Mono', monospace;
-    animation: slideUp 0.8s ease;
-  }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(7, 17, 31, 0.92);
+      backdrop-filter: blur(16px);
+    }
 
-  /* Stat bar */
-  .stat-bar {
-    display:flex; gap:0; margin-bottom:48px;
-    border:1px solid var(--border);
-    border-radius:8px; overflow:hidden;
-    animation: fadeIn 1s ease;
-  }
-  .stat {
-    flex:1; padding:18px 12px; text-align:center;
-    border-right:1px solid var(--border);
-    background:var(--surface);
-    transition:background 0.2s;
-  }
-  .stat:last-child { border-right:none; }
-  .stat:hover { background:var(--card); }
-  .stat-val {
-    font-size:26px; font-weight:800; color:var(--accent);
-    font-family:'Space Mono', monospace;
-    display:block;
-  }
-  .stat-label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; margin-top:4px; }
+    .nav {
+      width: min(1160px, calc(100% - 40px));
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      color: #fff;
+    }
 
-  /* Category filter */
-  .filters {
-    display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px;
-    animation: fadeIn 0.9s ease;
-  }
-  .filter-btn {
-    font-family:'Space Mono', monospace;
-    font-size:10px;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    border:1px solid var(--border);
-    background:transparent;
-    color:var(--muted);
-    padding:7px 16px;
-    border-radius:2px;
-    cursor:pointer;
-    transition:all 0.2s;
-  }
-  .filter-btn:hover, .filter-btn.active {
-    border-color:var(--accent);
-    color:var(--accent);
-    background:rgba(0,199,255,0.06);
-  }
-  .filter-btn.active { font-weight:700; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
 
-  /* Stack grid */
-  .stack-grid {
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap:12px;
-  }
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+    }
 
-  .tech-card {
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:6px;
-    padding:18px 20px;
-    cursor:pointer;
-    transition:all 0.25s cubic-bezier(0.23,1,0.32,1);
-    position:relative;
-    overflow:hidden;
-    animation: cardIn 0.5s ease both;
-  }
-  .tech-card::before {
-    content:'';
-    position:absolute; top:0; left:0; right:0; height:2px;
-    background:linear-gradient(90deg, var(--accent), transparent);
-    opacity:0;
-    transition:opacity 0.25s;
-  }
-  .tech-card:hover {
-    border-color:rgba(0,199,255,0.4);
-    transform:translateY(-3px);
-    box-shadow:0 12px 40px rgba(0,199,255,0.1);
-  }
-  .tech-card:hover::before { opacity:1; }
-  .tech-card.hidden { display:none; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 14px;
+      font-weight: 600;
+    }
 
-  .card-top { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
-  .card-icon {
-    width:36px; height:36px; border-radius:6px;
-    display:flex; align-items:center; justify-content:center;
-    font-size:18px; flex-shrink:0;
-  }
-  .card-name { font-size:14px; font-weight:700; color:var(--text); }
-  .card-cat {
-    font-family:'Space Mono', monospace;
-    font-size:9px;
-    color:var(--muted);
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-  }
+    .nav-links a:hover {
+      color: #fff;
+    }
 
-  /* Proficiency bar */
-  .prof-bar {
-    height:3px;
-    background:var(--border);
-    border-radius:2px;
-    margin-top:10px;
-    overflow:hidden;
-  }
-  .prof-fill {
-    height:100%;
-    border-radius:2px;
-    transition:width 0.8s cubic-bezier(0.23,1,0.32,1);
-  }
+    .hero {
+      position: relative;
+      min-height: 720px;
+      background:
+        linear-gradient(90deg, rgba(7, 17, 31, 0.98) 0%, rgba(7, 17, 31, 0.88) 43%, rgba(7, 17, 31, 0.28) 78%),
+        url("assets/salesforce-hero.png") center / cover no-repeat;
+      color: #fff;
+      overflow: hidden;
+    }
 
-  .prof-label {
-    display:flex; justify-content:space-between;
-    margin-top:6px;
-    font-family:'Space Mono', monospace;
-    font-size:9px;
-    color:var(--muted);
-  }
+    .hero-inner {
+      width: min(1160px, calc(100% - 40px));
+      min-height: 656px;
+      margin: 0 auto;
+      display: grid;
+      align-items: center;
+      padding: 72px 0 188px;
+    }
 
-  /* Category colors */
-  .cat-platform .card-icon { background:rgba(0,161,224,0.15); }
-  .cat-platform .prof-fill { background: linear-gradient(90deg, #00A1E0, #00c7ff); }
-  .cat-platform .card-name { color:#5bc8f5; }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(720px, 100%);
+    }
 
-  .cat-ai .card-icon { background:rgba(245,166,35,0.15); }
-  .cat-ai .prof-fill { background: linear-gradient(90deg, #f5a623, #ffd166); }
-  .cat-ai .card-name { color:#ffc145; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 100%;
+      margin-bottom: 20px;
+      padding: 7px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 13px;
+      font-weight: 700;
+    }
 
-  .cat-integration .card-icon { background:rgba(0,214,143,0.15); }
-  .cat-integration .prof-fill { background: linear-gradient(90deg, #00d68f, #5fffcc); }
-  .cat-integration .card-name { color:#00d68f; }
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 6px rgba(25, 135, 84, 0.2);
+    }
 
-  .cat-dev .card-icon { background:rgba(162,105,255,0.15); }
-  .cat-dev .prof-fill { background: linear-gradient(90deg, #a269ff, #c9a6ff); }
-  .cat-dev .card-name { color:#c4a0ff; }
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: 0.98;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
 
-  .cat-cloud .card-icon { background:rgba(255,107,107,0.15); }
-  .cat-cloud .prof-fill { background: linear-gradient(90deg, #ff6b6b, #ff9f9f); }
-  .cat-cloud .card-name { color:#ff8e8e; }
+    .hero-lead {
+      max-width: 670px;
+      margin: 24px 0 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: clamp(18px, 2vw, 22px);
+    }
 
-  /* Certs section */
-  .section-title {
-    font-family:'Space Mono', monospace;
-    font-size:10px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:var(--accent);
-    margin:52px 0 20px;
-    display:flex; align-items:center; gap:12px;
-  }
-  .section-title::after {
-    content:'';flex:1;height:1px;background:var(--border);
-  }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
 
-  .certs-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:10px; }
-  .cert-pill {
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:4px;
-    padding:12px 16px;
-    display:flex; align-items:center; gap:10px;
-    transition:all 0.2s;
-  }
-  .cert-pill:hover { border-color:var(--gold); background:rgba(245,166,35,0.05); }
-  .cert-dot { width:8px; height:8px; border-radius:50%; background:var(--gold); flex-shrink:0; }
-  .cert-name { font-size:12px; font-weight:600; color:var(--text); }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font-weight: 800;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
 
-  /* Animations */
-  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-  @keyframes slideUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes cardIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+    .button:hover {
+      transform: translateY(-2px);
+    }
 
-  /* Tooltip */
-  .tooltip {
-    position:fixed;
-    background:#1e2d45;
-    border:1px solid var(--accent);
-    border-radius:6px;
-    padding:10px 14px;
-    font-size:12px;
-    color:var(--text);
-    pointer-events:none;
-    opacity:0;
-    transition:opacity 0.15s;
-    max-width:200px;
-    z-index:100;
-    font-family:'Space Mono', monospace;
-    line-height:1.5;
-  }
-  .tooltip.visible { opacity:1; }
+    .button.primary {
+      background: #fff;
+      color: var(--navy);
+    }
 
-  /* Footer */
-  .footer {
-    margin-top:64px;
-    text-align:center;
-    font-family:'Space Mono', monospace;
-    font-size:11px;
-    color:var(--muted);
-    border-top:1px solid var(--border);
-    padding-top:24px;
-  }
-  .footer a { color:var(--accent); text-decoration:none; }
-</style>
+    .button.secondary {
+      border-color: rgba(255, 255, 255, 0.24);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-strip {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(7, 17, 31, 0.75);
+      backdrop-filter: blur(14px);
+    }
+
+    .metrics {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .metric {
+      min-height: 104px;
+      padding: 22px 24px;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .metric:last-child {
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .metric strong {
+      display: block;
+      color: #fff;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    main {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 82px 0 64px;
+    }
+
+    section {
+      margin-bottom: 78px;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(280px, 0.52fr);
+      gap: 56px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .section-kicker {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .section-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.48fr);
+      gap: 22px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 0 1px 0 rgba(17, 24, 39, 0.03);
+    }
+
+    .about-panel {
+      padding: 30px;
+    }
+
+    .about-panel p {
+      margin: 0;
+      color: #334155;
+      font-size: 17px;
+    }
+
+    .about-panel p + p {
+      margin-top: 18px;
+    }
+
+    .availability {
+      padding: 24px;
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .availability h3,
+    .snapshot h3,
+    .role-card h3 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.25;
+    }
+
+    .availability p {
+      margin: 12px 0 0;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .work-card {
+      padding: 22px;
+      border-top: 4px solid var(--blue);
+    }
+
+    .work-card:nth-child(2) {
+      border-top-color: var(--teal);
+    }
+
+    .work-card:nth-child(3) {
+      border-top-color: var(--gold);
+    }
+
+    .work-card h3 {
+      margin: 0 0 9px;
+      font-size: 20px;
+    }
+
+    .work-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .skills-wrap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .skill-group {
+      padding: 22px;
+    }
+
+    .skill-group h3 {
+      margin: 0 0 14px;
+      color: var(--navy);
+      font-size: 17px;
+    }
+
+    .skill-group ul,
+    .role-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .skill-group li {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      color: #42526a;
+      font-size: 14px;
+    }
+
+    .skill-group li + li {
+      margin-top: 10px;
+    }
+
+    .skill-group li::before,
+    .role-card li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      margin-top: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex: 0 0 auto;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .role-card {
+      display: grid;
+      grid-template-columns: minmax(210px, 0.36fr) minmax(0, 1fr);
+      gap: 26px;
+      padding: 26px;
+    }
+
+    .role-meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .role-meta strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--blue);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .role-card p {
+      margin: 8px 0 16px;
+      color: var(--muted);
+    }
+
+    .role-card li {
+      display: flex;
+      gap: 10px;
+      color: #344054;
+      font-size: 15px;
+    }
+
+    .role-card li + li {
+      margin-top: 10px;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.7fr) minmax(300px, 0.3fr);
+      gap: 16px;
+    }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 22px;
+    }
+
+    .cert {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: #263245;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .cert::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex: 0 0 auto;
+    }
+
+    .snapshot {
+      padding: 24px;
+      background: #10243a;
+      color: #fff;
+    }
+
+    .snapshot dl {
+      margin: 18px 0 0;
+    }
+
+    .snapshot-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 13px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .snapshot dt {
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 14px;
+    }
+
+    .snapshot dd {
+      margin: 0;
+      color: #fff;
+      font-weight: 800;
+      text-align: right;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 30px;
+      align-items: center;
+      padding: 34px;
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .contact h2 {
+      max-width: 760px;
+    }
+
+    .contact p {
+      margin: 12px 0 0;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px 0;
+    }
+
+    @media (max-width: 960px) {
+      .nav {
+        min-height: 58px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        background:
+          linear-gradient(180deg, rgba(7, 17, 31, 0.98) 0%, rgba(7, 17, 31, 0.9) 54%, rgba(7, 17, 31, 0.72) 100%),
+          url("assets/salesforce-hero.png") center / cover no-repeat;
+      }
+
+      .hero-inner {
+        min-height: 620px;
+        padding: 76px 0 218px;
+      }
+
+      .metrics,
+      .work-grid,
+      .skills-wrap,
+      .proof-grid,
+      .about-grid,
+      .section-heading,
+      .role-card,
+      .contact,
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .metric:nth-child(3) {
+        border-left: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .contact-actions,
+      .footer-inner {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .nav,
+      .hero-inner,
+      .metrics,
+      main,
+      .footer-inner {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .hero-inner {
+        min-height: 680px;
+        padding-bottom: 34px;
+      }
+
+      .eyebrow {
+        display: flex;
+        align-items: flex-start;
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      h1 {
+        font-size: 34px;
+        line-height: 1.04;
+      }
+
+      .hero-lead {
+        font-size: 17px;
+      }
+
+      .hero-content,
+      .hero-lead,
+      h1,
+      h2,
+      h3,
+      p,
+      li,
+      .section-heading,
+      .about-grid,
+      .panel,
+      .contact,
+      .timeline,
+      .proof-grid,
+      .work-grid,
+      .skills-wrap {
+        max-width: calc(100vw - 28px);
+        overflow-wrap: break-word;
+      }
+
+      .hero-actions .button,
+      .contact-actions .button {
+        width: 100%;
+      }
+
+      .hero-strip {
+        position: static;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        min-height: 74px;
+        padding: 16px 18px;
+        border-right: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .metric strong {
+        font-size: 24px;
+      }
+
+      main {
+        padding-top: 58px;
+      }
+
+      section {
+        margin-bottom: 56px;
+      }
+
+      .about-panel,
+      .role-card,
+      .contact,
+      .cert-grid,
+      .snapshot,
+      .skill-group,
+      .work-card {
+        padding: 20px;
+      }
+
+      .cert-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero-content,
+      .section-heading,
+      .about-grid,
+      .panel,
+      .contact,
+      .timeline,
+      .proof-grid,
+      .work-grid,
+      .skills-wrap {
+        width: 100%;
+        max-width: 362px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p,
+      li,
+      .hero-lead,
+      .section-copy {
+        max-width: 340px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Gokul Krishnan T home">
+        <span class="brand-mark">GK</span>
+        <span>Gokul Krishnan T</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
 
-<div class="wrapper">
-
-  <div class="header">
-    <div class="header-tag">// tech stack</div>
-    <h1>Gokul <span>Krishnan</span> T</h1>
-    <p>salesforce_developer · coimbatore, india · 2.5 yrs exp</p>
-  </div>
-
-  <div class="stat-bar">
-    <div class="stat">
-      <span class="stat-val" data-count="8">0</span>
-      <div class="stat-label">Certifications</div>
-    </div>
-    <div class="stat">
-      <span class="stat-val" data-count="478">0</span>
-      <div class="stat-label">Trailhead Badges</div>
-    </div>
-    <div class="stat">
-      <span class="stat-val" data-count="220">0</span>
-      <div class="stat-label">K+ Points</div>
-    </div>
-    <div class="stat">
-      <span class="stat-val" data-count="3">0</span>
-      <div class="stat-label">Companies</div>
-    </div>
-  </div>
-
-  <div class="filters">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="platform">Platform</button>
-    <button class="filter-btn" data-filter="ai">AI & Agents</button>
-    <button class="filter-btn" data-filter="integration">Integrations</button>
-    <button class="filter-btn" data-filter="cloud">Clouds</button>
-    <button class="filter-btn" data-filter="dev">Dev Tools</button>
-  </div>
-
-  <div class="stack-grid" id="stackGrid"></div>
-
-  <div class="section-title">certifications</div>
-  <div class="certs-grid" id="certsGrid"></div>
-
-  <div class="footer">
-    <p>📩 <a href="mailto:gokulkrishnant99@gmail.com">gokulkrishnant99@gmail.com</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/gokulkrishnant/" target="_blank">LinkedIn</a> &nbsp;·&nbsp; Trailhead Ranger</p>
-  </div>
-
-</div>
-
-<div class="tooltip" id="tooltip"></div>
-
-<script>
-const stack = [
-  // Platform
-  { name:"Apex", cat:"platform", icon:"⚙️", prof:95, yrs:"2.5yr", tip:"Triggers, Batch, Async, REST Callouts, SOLID principles" },
-  { name:"LWC", cat:"platform", icon:"⚡", prof:92, yrs:"2.5yr", tip:"Mobile-responsive components, SLDS, Event handling, Parent-Child" },
-  { name:"SOQL / SOSL", cat:"platform", icon:"🔍", prof:90, yrs:"2.5yr", tip:"Optimized queries, relationships, governor limits awareness" },
-  { name:"Flows & Triggers", cat:"platform", icon:"🔄", prof:93, yrs:"2.5yr", tip:"Screen flows, Scheduled flows, Record-triggered, Subflows" },
-  { name:"Platform Events", cat:"platform", icon:"📡", prof:80, yrs:"1.5yr", tip:"Event-driven architecture, pub/sub messaging on Salesforce" },
-  { name:"Salesforce Security", cat:"platform", icon:"🔐", prof:88, yrs:"2yr", tip:"Profiles, Permission Sets, Sharing Rules, OWD, Field-level security" },
-
-  // AI & Agents
-  { name:"Agentforce", cat:"ai", icon:"🤖", prof:85, yrs:"1yr", tip:"Topics, Instructions, Flows, Chatbot with guided conversations" },
-  { name:"Prompt Builder", cat:"ai", icon:"✨", prof:82, yrs:"1yr", tip:"Template-based prompts, dynamic grounding, Apex integration" },
-  { name:"OpenAI GPT API", cat:"ai", icon:"🧠", prof:80, yrs:"1yr", tip:"GPT-3.5 integration via Named Credentials, voice TTS/STT" },
-  { name:"Data Cloud", cat:"ai", icon:"☁️", prof:75, yrs:"0.5yr", tip:"Unified data profiles, segmentation, real-time activation" },
-  { name:"Vibe Coding / Cursor", cat:"ai", icon:"🎯", prof:78, yrs:"0.5yr", tip:"AI-assisted Salesforce development, Agentforce Vibe Coding" },
-
-  // Integrations
-  { name:"REST / SOAP APIs", cat:"integration", icon:"🔗", prof:90, yrs:"2yr", tip:"Callouts, Named Credentials, Connected Apps, OAuth 2.0" },
-  { name:"QuickBooks API", cat:"integration", icon:"💰", prof:82, yrs:"Current", tip:"Bidirectional sync — invoices, payments, financial records" },
-  { name:"Identfo API", cat:"integration", icon:"🪪", prof:80, yrs:"Current", tip:"KYC/identity verification integrated into SF onboarding flows" },
-  { name:"Salesforce CMS", cat:"integration", icon:"📰", prof:85, yrs:"1yr", tip:"Content delivery, Experience Cloud integration, personalization" },
-
-  // Clouds
-  { name:"Sales Cloud", cat:"cloud", icon:"💼", prof:90, yrs:"2yr", tip:"Lead, Opportunity, Account management. Real estate CRM built here" },
-  { name:"Experience Cloud", cat:"cloud", icon:"🌐", prof:88, yrs:"2yr", tip:"Portals, communities, agent + buyer self-service UX" },
-  { name:"Health Cloud", cat:"cloud", icon:"🏥", prof:85, yrs:"1.5yr", tip:"Patient enrollment, prescription modules, care timeline" },
-
-  // Dev Tools
-  { name:"Git / GitHub", cat:"dev", icon:"🌿", prof:88, yrs:"2.5yr", tip:"Branching, PRs, code reviews, version control" },
-  { name:"CI/CD Pipelines", cat:"dev", icon:"🚀", prof:78, yrs:"1.5yr", tip:"Salesforce DX, scratch orgs, pipeline deployment" },
-  { name:"JavaScript / HTML / CSS", cat:"dev", icon:"🖥️", prof:85, yrs:"2.5yr", tip:"Used heavily in LWC, Experience Cloud theming" },
-  { name:"VS Code", cat:"dev", icon:"🛠️", prof:95, yrs:"2.5yr", tip:"Salesforce Extension Pack, debugging, Org Browser" },
-  { name:"Node.js", cat:"dev", icon:"🟢", prof:72, yrs:"1yr", tip:"Tooling, scripts, Salesforce DX automation" },
-];
-
-const certs = [
-  "Platform Developer I (PD1)",
-  "Platform Developer II (PD2)",
-  "JavaScript Developer I",
-  "AI Specialist",
-  "AI Associate",
-  "Data Cloud Consultant",
-  "Salesforce Administrator",
-  "Agentforce Specialist",
-];
-
-// Render stack
-function renderStack(filter) {
-  const grid = document.getElementById('stackGrid');
-  grid.innerHTML = '';
-  const filtered = filter === 'all' ? stack : stack.filter(t => t.cat === filter);
-  filtered.forEach((tech, i) => {
-    const card = document.createElement('div');
-    card.className = `tech-card cat-${tech.cat}`;
-    card.style.animationDelay = `${i * 0.04}s`;
-    card.dataset.tip = tech.tip;
-    card.innerHTML = `
-      <div class="card-top">
-        <div class="card-icon">${tech.icon}</div>
-        <div>
-          <div class="card-name">${tech.name}</div>
-          <div class="card-cat">${tech.cat} · ${tech.yrs}</div>
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="eyebrow">Open to Bangalore, Coimbatore, Chennai and remote roles</div>
+        <h1>Salesforce Developer building CRM, portals, integrations and AI automation.</h1>
+        <p class="hero-lead">I am a 3+ years Salesforce Developer focused on Apex, LWC, Experience Cloud, Sales Cloud, Health Cloud, Agentforce, Data Cloud and enterprise integrations.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="mailto:gokulkrishnant99@gmail.com">Email Me</a>
+          <a class="button secondary" href="https://www.linkedin.com/in/gokulkrishnant/" target="_blank" rel="noreferrer">LinkedIn Profile</a>
         </div>
       </div>
-      <div class="prof-bar">
-        <div class="prof-fill" style="width:0%" data-width="${tech.prof}%"></div>
+    </div>
+    <div class="hero-strip" aria-label="Profile highlights">
+      <div class="metrics">
+        <div class="metric">
+          <strong>3+ yrs</strong>
+          <span>Salesforce delivery experience</span>
+        </div>
+        <div class="metric">
+          <strong>8x</strong>
+          <span>Salesforce certified</span>
+        </div>
+        <div class="metric">
+          <strong>558+</strong>
+          <span>Trailhead badges</span>
+        </div>
+        <div class="metric">
+          <strong>220k+</strong>
+          <span>Trailhead points</span>
+        </div>
       </div>
-      <div class="prof-label">
-        <span>proficiency</span>
-        <span>${tech.prof}%</span>
+    </div>
+  </section>
+
+  <main>
+    <section id="about">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">About</p>
+          <h2>Developer who connects business workflows with reliable Salesforce architecture.</h2>
+        </div>
+        <p class="section-copy">My work spans real estate CRM, healthcare onboarding, customer portals, automation, integrations and AI-assisted service experiences.</p>
       </div>
-    `;
-    grid.appendChild(card);
-    // Animate bars after paint
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        card.querySelector('.prof-fill').style.width = tech.prof + '%';
-      }, 100 + i * 40);
-    });
-  });
-}
 
-// Render certs
-function renderCerts() {
-  const grid = document.getElementById('certsGrid');
-  certs.forEach(c => {
-    const el = document.createElement('div');
-    el.className = 'cert-pill';
-    el.innerHTML = `<div class="cert-dot"></div><div class="cert-name">${c}</div>`;
-    grid.appendChild(el);
-  });
-}
+      <div class="about-grid">
+        <div class="panel about-panel">
+          <p>I build Salesforce solutions that are practical for users and maintainable for teams: Apex services, Lightning Web Components, Flows, Experience Cloud portals, API integrations, document workflows and production support.</p>
+          <p>At Dotts Tech, I work on real estate CRM platforms with lead management, buyer and agent portals, booking journeys, EOI and CIF processes, QuickBooks sync, Identfo KYC verification, DocuSign flows and automated approvals.</p>
+          <p>Earlier at Value Health Inc, I delivered Health Cloud and Experience Cloud features for patient onboarding, consent workflows, CMS-driven content and an Agentforce plus OpenAI chatbot that reduced onboarding time by 60%.</p>
+        </div>
 
-// Filters
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderStack(btn.dataset.filter);
-  });
-});
+        <aside class="panel availability">
+          <h3>Current Focus</h3>
+          <p>Salesforce Developer and Senior Salesforce Developer roles where I can own Apex, LWC, Experience Cloud, Sales Cloud, Health Cloud, AI automation and integrations.</p>
+          <div class="tag-list" aria-label="Preferred job locations">
+            <span class="tag">Bangalore</span>
+            <span class="tag">Coimbatore</span>
+            <span class="tag">Chennai</span>
+            <span class="tag">Remote</span>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-// Tooltip
-const tooltip = document.getElementById('tooltip');
-document.addEventListener('mousemove', e => {
-  const card = e.target.closest('.tech-card');
-  if (card && card.dataset.tip) {
-    tooltip.textContent = card.dataset.tip;
-    tooltip.classList.add('visible');
-    tooltip.style.left = (e.clientX + 14) + 'px';
-    tooltip.style.top = (e.clientY - 10) + 'px';
-  } else {
-    tooltip.classList.remove('visible');
-  }
-});
+    <section aria-labelledby="impact-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Impact</p>
+          <h2 id="impact-title">Business outcomes I have worked on.</h2>
+        </div>
+        <p class="section-copy">Clear automation, clean user journeys and integrations that remove manual effort from day-to-day operations.</p>
+      </div>
 
-// Counter animation
-function animateCount(el) {
-  const target = parseInt(el.dataset.count);
-  const suffix = el.dataset.count >= 100 ? '' : '';
-  let current = 0;
-  const step = Math.ceil(target / 40);
-  const interval = setInterval(() => {
-    current = Math.min(current + step, target);
-    el.textContent = current + (target === 220 ? 'k+' : target === 8 ? 'x' : '+');
-    if (current >= target) clearInterval(interval);
-  }, 30);
-}
+      <div class="work-grid">
+        <article class="panel work-card">
+          <h3>Real Estate CRM</h3>
+          <p>Lead assignment, property listing workflows, buyer onboarding, booking operations, payment records, document generation and approval automation.</p>
+        </article>
+        <article class="panel work-card">
+          <h3>Patient Experience</h3>
+          <p>Health Cloud onboarding, consent management, insurance workflows, prescription updates, care program journeys and patient portal components.</p>
+        </article>
+        <article class="panel work-card">
+          <h3>AI and Integrations</h3>
+          <p>Agentforce chatbot flows, OpenAI-powered guidance, Salesforce CMS delivery, QuickBooks sync, Identfo KYC and DocuSign signing journeys.</p>
+        </article>
+      </div>
+    </section>
 
-// Init
-renderStack('all');
-renderCerts();
-document.querySelectorAll('.stat-val').forEach(el => animateCount(el));
-</script>
+    <section id="skills">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Core Skills</p>
+          <h2>Salesforce platform skills with real implementation depth.</h2>
+        </div>
+        <p class="section-copy">A focused stack across custom development, declarative automation, portals, APIs, DevOps and AI features.</p>
+      </div>
+
+      <div class="skills-wrap">
+        <div class="panel skill-group">
+          <h3>Platform</h3>
+          <ul>
+            <li>Apex, Triggers and SOQL</li>
+            <li>Lightning Web Components</li>
+            <li>Flows and approvals</li>
+            <li>Batch, Queueable and Scheduled Apex</li>
+          </ul>
+        </div>
+        <div class="panel skill-group">
+          <h3>Clouds</h3>
+          <ul>
+            <li>Sales Cloud</li>
+            <li>Experience Cloud</li>
+            <li>Health Cloud</li>
+            <li>Data Cloud</li>
+          </ul>
+        </div>
+        <div class="panel skill-group">
+          <h3>AI and Automation</h3>
+          <ul>
+            <li>Agentforce</li>
+            <li>Prompt Builder</li>
+            <li>OpenAI integrations</li>
+            <li>Guided service journeys</li>
+          </ul>
+        </div>
+        <div class="panel skill-group">
+          <h3>Integrations</h3>
+          <ul>
+            <li>REST and SOAP APIs</li>
+            <li>QuickBooks API</li>
+            <li>DocuSign flows</li>
+            <li>Git and CI/CD</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Experience</p>
+          <h2>Recent Salesforce work.</h2>
+        </div>
+        <p class="section-copy">The content is written for portfolio readability, not copied line-for-line from LinkedIn.</p>
+      </div>
+
+      <div class="timeline">
+        <article class="panel role-card">
+          <div class="role-meta">
+            <strong>Current</strong>
+            Dotts Tech<br>
+            Salesforce Developer<br>
+            Coimbatore
+          </div>
+          <div>
+            <h3>Real estate CRM, portals and finance integrations</h3>
+            <p>Building Sales Cloud and Experience Cloud solutions for sales, buyer onboarding and back-office operations.</p>
+            <ul>
+              <li>Delivered LWC and portal experiences for agents, buyers and internal sales teams.</li>
+              <li>Automated lead management, EOI, CIF, booking, notification, approval and document workflows.</li>
+              <li>Integrated QuickBooks, Identfo KYC and DocuSign using Salesforce automation and API patterns.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="panel role-card">
+          <div class="role-meta">
+            <strong>2023 - 2025</strong>
+            Value Health Inc<br>
+            Salesforce Developer<br>
+            Coimbatore
+          </div>
+          <div>
+            <h3>Health Cloud, Experience Cloud and AI onboarding</h3>
+            <p>Worked on patient-facing and operations-focused Salesforce healthcare solutions.</p>
+            <ul>
+              <li>Created onboarding, consent, prescription, insurance and care program automation.</li>
+              <li>Built Agentforce and OpenAI-assisted chatbot journeys that reduced onboarding time by 60%.</li>
+              <li>Integrated Salesforce CMS with Experience Cloud to reduce content management effort by 80%.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="panel role-card">
+          <div class="role-meta">
+            <strong>2023</strong>
+            Adapt IQ<br>
+            Salesforce Developer Intern<br>
+            Coimbatore
+          </div>
+          <div>
+            <h3>Salesforce fundamentals and delivery practice</h3>
+            <p>Built strong implementation basics across data models, automation, Apex, LWC and user access.</p>
+            <ul>
+              <li>Worked on timesheet and property management use cases with measurable process improvements.</li>
+              <li>Built hands-on skill in Flows, triggers, profiles, data modeling and Lightning development.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Proof</p>
+          <h2>Certifications and learning record.</h2>
+        </div>
+        <p class="section-copy">8 Salesforce credentials plus a Five Star Ranger Trailhead profile with 558+ badges and 220k+ points.</p>
+      </div>
+
+      <div class="proof-grid">
+        <div class="panel cert-grid" aria-label="Salesforce certifications">
+          <div class="cert">Platform Developer I</div>
+          <div class="cert">Platform Developer II</div>
+          <div class="cert">JavaScript Developer I</div>
+          <div class="cert">Salesforce Administrator</div>
+          <div class="cert">Experience Cloud Consultant</div>
+          <div class="cert">Data Cloud Consultant</div>
+          <div class="cert">AI Specialist</div>
+          <div class="cert">AI Associate</div>
+        </div>
+
+        <aside class="panel snapshot">
+          <h3>Trailhead Snapshot</h3>
+          <dl>
+            <div class="snapshot-row">
+              <dt>Rank</dt>
+              <dd>Five Star Ranger</dd>
+            </div>
+            <div class="snapshot-row">
+              <dt>Badges</dt>
+              <dd>558+</dd>
+            </div>
+            <div class="snapshot-row">
+              <dt>Points</dt>
+              <dd>220k+</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="panel contact" id="contact">
+      <div>
+        <p class="section-kicker">Contact</p>
+        <h2>Available for Salesforce Developer and Senior Salesforce Developer opportunities.</h2>
+        <p>Email: <a href="mailto:gokulkrishnant99@gmail.com">gokulkrishnant99@gmail.com</a></p>
+      </div>
+      <div class="contact-actions">
+        <a class="button primary" href="mailto:gokulkrishnant99@gmail.com">Send Email</a>
+        <a class="button secondary" href="https://www.linkedin.com/in/gokulkrishnant/" target="_blank" rel="noreferrer">View LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>Gokul Krishnan T - Salesforce Developer</span>
+      <span>Apex | LWC | Experience Cloud | Agentforce | Integrations</span>
+    </div>
+  </footer>
 </body>
 </html>
