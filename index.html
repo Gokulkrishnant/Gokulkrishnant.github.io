@@ -118,6 +118,8 @@
       min-height: 656px;
       margin: 0 auto;
       display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.62fr);
+      gap: 56px;
       align-items: center;
       padding: 72px 0 188px;
     }
@@ -173,6 +175,85 @@
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 34px;
+    }
+
+    .hero-profile {
+      position: relative;
+      z-index: 1;
+      justify-self: end;
+      width: min(500px, 100%);
+      margin: 0;
+      padding: 0;
+    }
+
+    .profile-frame {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1 / 0.95;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .profile-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(7, 17, 31, 0.62), rgba(7, 17, 31, 0) 28%, rgba(7, 17, 31, 0.14) 100%),
+        linear-gradient(0deg, rgba(7, 17, 31, 0.42), rgba(7, 17, 31, 0) 42%);
+    }
+
+    .profile-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: 55% 35%;
+      filter: saturate(1.04) contrast(1.02);
+    }
+
+    .profile-caption {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 12px;
+      margin-top: 14px;
+      padding: 0;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      backdrop-filter: none;
+    }
+
+    .profile-caption strong {
+      font-size: 18px;
+      line-height: 1.1;
+    }
+
+    .profile-caption span {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .profile-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .profile-badges span {
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 12px;
+      font-weight: 800;
     }
 
     .button {
@@ -593,6 +674,13 @@
       .hero-inner {
         min-height: 620px;
         padding: 76px 0 218px;
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .hero-profile {
+        justify-self: start;
+        width: min(430px, 100%);
       }
 
       .metrics,
@@ -627,12 +715,19 @@
       .metrics,
       main,
       .footer-inner {
-        width: min(100% - 28px, 1160px);
+        width: calc(100vw - 28px);
       }
 
       .hero-inner {
         min-height: 680px;
         padding-bottom: 34px;
+        gap: 28px;
+      }
+
+      .hero-content,
+      .hero-lead {
+        width: 100%;
+        max-width: 100%;
       }
 
       .eyebrow {
@@ -649,9 +744,23 @@
 
       .hero-lead {
         font-size: 17px;
+        max-width: 100%;
+      }
+
+      .profile-caption {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .profile-caption strong,
+      .profile-caption span {
+        max-width: 100%;
+        overflow-wrap: break-word;
       }
 
       .hero-content,
+      .hero-profile,
       .hero-lead,
       h1,
       h2,
@@ -677,6 +786,18 @@
 
       .hero-strip {
         position: static;
+      }
+
+      .profile-frame {
+        aspect-ratio: 1 / 1;
+      }
+
+      .profile-caption {
+        margin-top: 12px;
+      }
+
+      .profile-badges {
+        width: 100%;
       }
 
       .metrics {
@@ -718,6 +839,7 @@
 
     @media (max-width: 420px) {
       .hero-content,
+      .hero-profile,
       .section-heading,
       .about-grid,
       .panel,
@@ -742,6 +864,15 @@
 
       h1 {
         font-size: 32px;
+      }
+
+      .hero-lead {
+        max-width: 100%;
+        font-size: 16px;
+      }
+
+      .profile-caption span {
+        font-size: 12px;
       }
     }
   </style>
@@ -768,12 +899,27 @@
       <div class="hero-content">
         <div class="eyebrow">Open to Bangalore, Coimbatore, Chennai and remote roles</div>
         <h1>Salesforce Developer building CRM, portals, integrations and AI automation.</h1>
-        <p class="hero-lead">I am a 3+ years Salesforce Developer focused on Apex, LWC, Experience Cloud, Sales Cloud, Health Cloud, Agentforce, Data Cloud and enterprise integrations.</p>
+        <p class="hero-lead">Salesforce developer for CRM and AI automation.</p>
         <div class="hero-actions">
           <a class="button primary" href="mailto:gokulkrishnant99@gmail.com">Email Me</a>
           <a class="button secondary" href="https://www.linkedin.com/in/gokulkrishnant/" target="_blank" rel="noreferrer">LinkedIn Profile</a>
         </div>
       </div>
+      <figure class="hero-profile" aria-label="Gokul Krishnan profile">
+        <div class="profile-frame">
+          <img src="assets/gokul-profile-professional.png" alt="Gokul Krishnan T, Salesforce Developer" loading="eager">
+        </div>
+        <figcaption class="profile-caption">
+          <strong>Gokul Krishnan T</strong>
+          <span>Salesforce Developer | 8x Certified</span>
+        </figcaption>
+        <div class="profile-badges" aria-label="Profile strengths">
+          <span>Apex</span>
+          <span>LWC</span>
+          <span>Experience Cloud</span>
+          <span>Agentforce</span>
+        </div>
+      </figure>
     </div>
     <div class="hero-strip" aria-label="Profile highlights">
       <div class="metrics">
