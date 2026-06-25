@@ -353,6 +353,27 @@
     .button.dark:hover { background: var(--green); }
     .button.light { border-color: var(--line); background: #fff; color: var(--ink); }
 
+    .view-counter {
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 10px 13px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .view-counter img {
+      height: 24px;
+      width: auto;
+      max-width: 190px;
+    }
+
     .hero-profile {
       align-self: end;
       justify-self: end;
@@ -1103,6 +1124,10 @@
         <div class="hero-actions">
           <a class="button primary" href="mailto:gokulkrishnant99@gmail.com">Email Me</a>
           <a class="button secondary" href="https://www.linkedin.com/in/gokulkrishnant/" target="_blank" rel="noreferrer">LinkedIn Profile</a>
+        </div>
+        <div class="view-counter" aria-label="Live portfolio page view counter">
+          <span>Live views</span>
+          <img src="https://hits.sh/gokulkrishnant.github.io.svg?style=flat-square&amp;label=portfolio%20views&amp;color=0d8b70&amp;labelColor=14213d" alt="Portfolio page view count" loading="lazy" />
         </div>
       </div>
 
