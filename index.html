@@ -4,136 +4,265 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Gokul Krishnan T - Salesforce Developer with 3+ years of experience in Apex, LWC, Experience Cloud, Sales Cloud, Health Cloud, Agentforce, integrations, and automation." />
-  <meta name="theme-color" content="#0B1220" />
+  <meta name="theme-color" content="#FFF8EE" />
   <title>Gokul Krishnan T | Salesforce Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <style>
     :root {
-      --paper: #F7F8FB;
-      --ink: #0B1220;
-      --ink-soft: #131E30;
-      --ink-line: rgba(255,255,255,0.14);
-      --text: #16202E;
-      --muted: #5B6577;
-      --line: #E1E6EE;
-      --panel: #ffffff;
-      --blue: #2F6FED;
-      --blue-deep: #1E4FC4;
-      --amber: #D98F1F;
-      --green: #1FA971;
-      --radius: 10px;
-      --shadow: 0 18px 50px rgba(11,18,32,0.10);
-      --font-display: "Space Grotesk", "Inter", sans-serif;
+      --cream: #FFF8EE;
+      --cream-strong: #F5EBDD;
+      --paper: #FFFFFF;
+      --ink: #14213D;
+      --ink-soft: #243656;
+      --text: #27364A;
+      --muted: #66758B;
+      --line: #E7DDCF;
+      --green: #0D8B70;
+      --green-soft: #DDF5ED;
+      --blue: #2774E6;
+      --blue-soft: #E7F0FF;
+      --coral: #EE6C4D;
+      --coral-soft: #FFE7DF;
+      --gold: #D89922;
+      --radius: 8px;
+      --shadow: 0 24px 70px rgba(20, 33, 61, 0.12);
+      --font-display: "Manrope", "Inter", sans-serif;
       --font-body: "Inter", Arial, sans-serif;
-      --font-mono: "JetBrains Mono", monospace;
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 116px;
+    }
 
     body {
       margin: 0;
-      background: var(--paper);
+      background: var(--cream);
       color: var(--text);
       font-family: var(--font-body);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
+    body.menu-open { overflow: hidden; }
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+    img { display: block; max-width: 100%; }
+    button { font: inherit; }
 
-    /* ---------- Header ---------- */
+    .skip-link {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 100;
+      transform: translateY(-140%);
+      padding: 10px 14px;
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: #fff;
+      transition: transform .2s ease;
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .scroll-progress {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 80;
+      height: 4px;
+      background: var(--green);
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    .top-strip {
+      background: var(--ink);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .top-strip-inner {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 40px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .top-strip a {
+      color: #BEEADD;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
     .site-header {
       position: sticky;
       top: 0;
-      z-index: 20;
-      background: rgba(11, 18, 32, 0.92);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--ink-line);
+      z-index: 60;
+      background: rgba(255, 248, 238, 0.92);
+      border-bottom: 1px solid rgba(231, 221, 207, 0.78);
+      backdrop-filter: blur(16px);
     }
 
     .nav {
       width: min(1180px, calc(100% - 40px));
+      min-height: 76px;
       margin: 0 auto;
-      min-height: 64px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
-      color: #fff;
     }
 
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      min-width: 0;
       font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 15px;
+      font-weight: 900;
+      color: var(--ink);
       white-space: nowrap;
     }
 
     .brand-mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, var(--blue), var(--amber));
-      border: 1px solid rgba(255,255,255,0.24);
-      overflow: hidden;
+      width: 42px;
+      height: 42px;
       flex: 0 0 auto;
+      overflow: hidden;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 10px 24px rgba(20, 33, 61, 0.16);
+      background: var(--blue-soft);
     }
 
     .brand-mark img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 32%;
+      object-position: center 30%;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 1px;
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 26px;
+      gap: 28px;
+      color: #3A485F;
       font-size: 14px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.74);
+      font-weight: 800;
     }
 
-    .nav-links a { transition: color .15s ease; }
-    .nav-links a:hover { color: #fff; }
-
-    /* ---------- Hero ---------- */
-    .hero {
+    .nav-links a {
       position: relative;
-      min-height: calc(100vh - 64px);
-      background:
-        linear-gradient(90deg, rgba(7, 13, 25, 0.96) 0%, rgba(7, 13, 25, 0.88) 42%, rgba(7, 13, 25, 0.48) 72%, rgba(7, 13, 25, 0.30) 100%),
-        url("assets/salesforce-hero.png") center right / cover no-repeat,
-        var(--ink);
-      color: #fff;
-      overflow: hidden;
+      padding: 8px 0;
     }
 
-    .hero::before {
+    .nav-links a::after {
       content: "";
       position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 18px 18px, rgba(255,255,255,0.07) 1.5px, transparent 1.5px);
-      background-size: 36px 36px;
-      opacity: 0.28;
-      pointer-events: none;
+      inset: auto 0 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--green);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .2s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 12px 30px rgba(20, 33, 61, 0.18);
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      background: var(--green);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .menu-icon {
+      width: 18px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .menu-icon span {
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .site-header.nav-open .menu-icon span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .site-header.nav-open .menu-icon span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .site-header.nav-open .menu-icon span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 82vh;
+      color: #fff;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(20, 33, 61, 0.96) 0%, rgba(20, 33, 61, 0.84) 42%, rgba(20, 33, 61, 0.36) 100%),
+        url("assets/salesforce-hero.png") center right / cover no-repeat,
+        var(--ink);
     }
 
     .hero::after {
       content: "";
       position: absolute;
       inset: auto 0 0;
-      height: 38%;
-      background: linear-gradient(180deg, transparent, rgba(7, 13, 25, 0.86));
+      height: 112px;
+      background: linear-gradient(180deg, rgba(255, 248, 238, 0), var(--cream));
       pointer-events: none;
     }
 
@@ -141,61 +270,66 @@
       position: relative;
       z-index: 1;
       width: min(1180px, calc(100% - 40px));
+      min-height: 82vh;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.62fr);
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.58fr);
       gap: 56px;
       align-items: center;
-      padding: 76px 0 70px;
-      min-height: calc(100vh - 64px);
+      padding: 76px 0 120px;
     }
 
-    .eyebrow {
+    .kicker {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 22px;
-      padding: 7px 12px;
-      border: 1px solid var(--ink-line);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.86);
+      gap: 9px;
+      margin: 0 0 18px;
+      color: #D8FFF2;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0;
     }
 
-    .eyebrow::before {
+    .kicker::before {
       content: "";
-      width: 7px;
-      height: 7px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: var(--green);
-      box-shadow: 0 0 0 5px rgba(31,169,113,0.22);
+      box-shadow: 0 0 0 6px rgba(13, 139, 112, 0.24);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      color: inherit;
+      font-family: var(--font-display);
+      line-height: 1.06;
+      letter-spacing: 0;
     }
 
     h1 {
-      margin: 0;
-      max-width: 740px;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: clamp(38px, 5.4vw, 60px);
-      line-height: 1.06;
-      letter-spacing: -0.01em;
-      text-wrap: balance;
+      max-width: 760px;
+      font-size: clamp(44px, 7vw, 86px);
+      font-weight: 900;
     }
 
     .hero-lead {
-      max-width: 600px;
-      margin: 22px 0 0;
-      color: rgba(255,255,255,0.74);
-      font-size: clamp(16px, 1.6vw, 18px);
+      max-width: 660px;
+      margin: 24px 0 0;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: clamp(17px, 1.8vw, 21px);
+      line-height: 1.65;
     }
 
-    .hero-actions {
+    .hero-actions,
+    .contact-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 32px;
+      margin-top: 34px;
     }
 
     .button {
@@ -203,626 +337,1068 @@
       align-items: center;
       justify-content: center;
       gap: 9px;
-      min-height: 48px;
-      padding: 0 20px;
+      min-height: 52px;
+      padding: 0 22px;
       border: 1px solid transparent;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 14.5px;
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      border-radius: 999px;
+      font-weight: 900;
+      transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
     }
 
     .button:hover { transform: translateY(-2px); }
     .button.primary { background: #fff; color: var(--ink); }
-    .button.secondary { border-color: var(--ink-line); color: #fff; background: rgba(255,255,255,0.06); }
+    .button.primary:hover { background: var(--green-soft); }
+    .button.secondary { border-color: rgba(255, 255, 255, 0.34); color: #fff; background: rgba(255, 255, 255, 0.08); }
+    .button.dark { background: var(--ink); color: #fff; }
+    .button.dark:hover { background: var(--green); }
+    .button.light { border-color: var(--line); background: #fff; color: var(--ink); }
 
-    .hero-chips {
+    .hero-profile {
+      align-self: end;
+      justify-self: end;
+      width: min(100%, 420px);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-profile img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
+    .profile-copy {
+      padding: 22px;
+      background: #fff;
+    }
+
+    .profile-copy h2 {
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .profile-copy p {
+      margin: 8px 0 18px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .profile-pills {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 36px;
+      gap: 8px;
     }
 
-    .hero-chips span {
+    .profile-pills span,
+    .tag {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 8px 13px;
-      border: 1px solid var(--ink-line);
+      min-height: 30px;
+      padding: 5px 11px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.05);
-      font-family: var(--font-mono);
-      font-size: 12.5px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.82);
+      background: var(--green-soft);
+      color: #075B4A;
+      font-size: 12px;
+      font-weight: 900;
     }
 
-    .hero-chips strong {
-      color: #fff;
-      font-weight: 600;
-    }
-
-    /* ---------- Profile card ---------- */
-    .record-card {
+    main {
       position: relative;
-      z-index: 1;
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 14px;
-      background: rgba(19, 30, 48, 0.84);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+      z-index: 2;
+    }
+
+    .proof-strip {
+      width: min(1180px, calc(100% - 40px));
+      margin: -58px auto 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
     }
 
-    .profile-photo {
-      position: relative;
-      aspect-ratio: 1 / 1;
-      background: #0B1220;
-      overflow: hidden;
+    .proof-item {
+      min-height: 126px;
+      padding: 24px;
+      border-right: 1px solid var(--line);
     }
 
-    .profile-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 32%;
-    }
-
-    .profile-photo::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0;
-      height: 36%;
-      background: linear-gradient(180deg, transparent, rgba(19, 30, 48, 0.96));
-      pointer-events: none;
-    }
-
-    .record-card-top {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 22px 22px 18px;
-      border-bottom: 1px solid rgba(255,255,255,0.10);
-    }
-
-    .avatar {
-      width: 56px;
-      height: 56px;
-      flex: 0 0 auto;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: #0B1220;
-    }
-
-    .avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 32%;
-    }
-
-    .record-card-top h3 {
-      margin: 0;
+    .proof-item:last-child { border-right: 0; }
+    .proof-item strong {
+      display: block;
+      color: var(--ink);
       font-family: var(--font-display);
-      font-size: 17px;
-      color: #fff;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 900;
+      line-height: 1;
     }
 
-    .record-card-top p {
-      margin: 4px 0 0;
-      font-size: 13px;
-      color: rgba(255,255,255,0.6);
-    }
-
-    .record-fields {
-      padding: 6px 22px 18px;
-    }
-
-    .record-row {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 13px 0;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .record-row dt {
-      font-size: 12.5px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.45);
-    }
-
-    .record-row dd {
-      margin: 0;
-      font-family: var(--font-mono);
-      font-weight: 600;
+    .proof-item span {
+      display: block;
+      margin-top: 9px;
+      color: var(--muted);
       font-size: 14px;
-      color: #fff;
-      text-align: right;
+      font-weight: 700;
     }
 
-    .record-row dd.status {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
+    .section {
+      padding: 96px 0;
+    }
+
+    .section.alt {
+      background: #fff;
+    }
+
+    .section-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(280px, 0.44fr);
+      gap: 52px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .section-kicker {
+      margin: 0 0 10px;
       color: var(--green);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0;
     }
 
-    .record-row dd.status::before {
+    .section-heading h2 {
+      color: var(--ink);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 900;
+    }
+
+    .section-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.76fr) minmax(300px, 0.38fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .about-copy,
+    .focus-panel,
+    .feature-card,
+    .skill-group,
+    .role-card,
+    .cert-grid,
+    .snapshot,
+    .testimonial,
+    .contact-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .about-copy {
+      padding: 34px;
+      color: #38485F;
+      font-size: 17px;
+    }
+
+    .about-copy p {
+      margin: 0;
+    }
+
+    .about-copy p + p {
+      margin-top: 18px;
+    }
+
+    .focus-panel {
+      padding: 28px;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .focus-panel h3 {
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .focus-panel p {
+      margin: 12px 0 22px;
+      color: rgba(255, 255, 255, 0.74);
+    }
+
+    .focus-panel .tag {
+      margin: 0 7px 8px 0;
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      min-height: 100%;
+      overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-media {
+      min-height: 156px;
+      padding: 22px;
+      display: flex;
+      align-items: flex-end;
+      background: var(--blue-soft);
+    }
+
+    .feature-card:nth-child(2) .feature-media { background: var(--coral-soft); }
+    .feature-card:nth-child(3) .feature-media { background: var(--green-soft); }
+
+    .feature-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--ink);
+      font-size: 27px;
+      font-weight: 900;
+      box-shadow: 0 14px 34px rgba(20, 33, 61, 0.14);
+    }
+
+    .feature-card-content {
+      padding: 24px;
+    }
+
+    .feature-card h3,
+    .skill-group h3,
+    .role-card h3,
+    .snapshot h3,
+    .testimonial h3 {
+      color: var(--ink);
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .feature-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    .skills-wrap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .skill-group {
+      padding: 24px;
+    }
+
+    .skill-group h3 {
+      margin-bottom: 16px;
+      font-size: 17px;
+    }
+
+    .skill-group ul,
+    .role-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .skill-group li,
+    .role-card li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: #3E4E66;
+      font-size: 14.5px;
+      font-weight: 600;
+    }
+
+    .skill-group li + li,
+    .role-card li + li {
+      margin-top: 11px;
+    }
+
+    .skill-group li::before,
+    .role-card li::before {
       content: "";
       width: 7px;
       height: 7px;
+      flex: 0 0 auto;
+      margin-top: 8px;
       border-radius: 50%;
       background: var(--green);
     }
 
-    .record-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      padding: 0 22px 22px;
+    .timeline {
+      display: grid;
+      gap: 16px;
     }
 
-    .record-badges span {
+    .role-card {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.33fr) minmax(0, 1fr);
+      gap: 28px;
+      padding: 30px;
+    }
+
+    .role-meta {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .role-meta strong {
+      display: inline-flex;
+      margin-bottom: 10px;
       padding: 5px 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.10);
-      font-size: 11.5px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.78);
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
     }
 
-    /* ---------- Main layout ---------- */
-    main {
-      width: min(1180px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 80px 0 60px;
+    .role-card > div > p {
+      margin: 10px 0 18px;
+      color: var(--muted);
     }
 
-    section { margin-bottom: 76px; }
-
-    .section-heading {
+    .proof-grid {
       display: grid;
-      grid-template-columns: minmax(0, 0.8fr) minmax(260px, 0.5fr);
-      gap: 50px;
-      align-items: end;
-      margin-bottom: 30px;
+      grid-template-columns: minmax(0, 0.68fr) minmax(280px, 0.32fr);
+      gap: 18px;
     }
 
-    .section-kicker {
-      margin: 0 0 8px;
-      color: var(--blue-deep);
-      font-family: var(--font-mono);
-      font-size: 12.5px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 24px;
     }
 
-    h2 {
-      margin: 0;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: clamp(28px, 3.6vw, 40px);
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-    }
-
-    .section-copy { margin: 0; color: var(--muted); font-size: 16px; }
-
-    .panel {
+    .cert {
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 13px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: var(--panel);
+      color: #2E3E56;
+      font-size: 14px;
+      font-weight: 800;
+      background: var(--cream);
     }
 
-    /* About */
-    .about-grid { display: grid; grid-template-columns: minmax(0,0.92fr) minmax(300px,0.48fr); gap: 20px; }
-    .about-panel { padding: 30px; }
-    .about-panel p { margin: 0; color: #334155; font-size: 16.5px; }
-    .about-panel p + p { margin-top: 16px; }
-
-    .availability { padding: 24px; background: var(--ink); color: #fff; }
-    .availability h3 { margin: 0; font-family: var(--font-display); font-size: 18px; }
-    .availability p { margin: 12px 0 0; color: rgba(255,255,255,0.66); font-size: 14.5px; }
-
-    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .tag {
-      display: inline-flex; align-items: center; min-height: 30px; padding: 5px 11px;
-      border: 1px solid rgba(255,255,255,0.16); border-radius: 999px;
-      color: rgba(255,255,255,0.85); font-size: 13px; font-weight: 600;
+    .cert::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--gold);
     }
 
-    /* Impact */
-    .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .work-card { padding: 22px; border-top: 3px solid var(--blue); }
-    .work-card:nth-child(2) { border-top-color: var(--amber); }
-    .work-card:nth-child(3) { border-top-color: #6F4FE0; }
-    .work-card h3 { margin: 0 0 9px; font-family: var(--font-display); font-size: 18px; }
-    .work-card p { margin: 0; color: var(--muted); font-size: 14.5px; }
-
-    /* Skills */
-    .skills-wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    .skill-group { padding: 22px; }
-    .skill-group h3 {
-      margin: 0 0 14px; color: var(--ink); font-family: var(--font-mono);
-      font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
-    }
-    .skill-group ul, .role-card ul { margin: 0; padding: 0; list-style: none; }
-    .skill-group li { display: flex; gap: 9px; align-items: flex-start; color: #42526A; font-size: 14px; }
-    .skill-group li + li { margin-top: 10px; }
-    .skill-group li::before, .role-card li::before {
-      content: ""; width: 6px; height: 6px; margin-top: 8px; border-radius: 50%;
-      background: var(--blue); flex: 0 0 auto;
+    .snapshot {
+      padding: 28px;
+      background: var(--green-soft);
     }
 
-    /* Experience timeline */
-    .timeline { display: grid; gap: 16px; }
-    .role-card { display: grid; grid-template-columns: minmax(200px,0.34fr) minmax(0,1fr); gap: 26px; padding: 26px; }
-    .role-meta { color: var(--muted); font-size: 14px; }
-    .role-meta strong {
-      display: block; margin-bottom: 8px; color: var(--blue-deep); font-family: var(--font-mono);
-      font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.08em;
+    .snapshot dl {
+      margin: 18px 0 0;
     }
-    .role-card h3 { margin: 0; font-family: var(--font-display); font-size: 19px; }
-    .role-card > div > p { margin: 8px 0 16px; color: var(--muted); }
-    .role-card li { display: flex; gap: 10px; color: #344054; font-size: 15px; }
-    .role-card li + li { margin-top: 10px; }
 
-    /* Certifications */
-    .proof-grid { display: grid; grid-template-columns: minmax(0,0.68fr) minmax(280px,0.32fr); gap: 16px; }
-    .cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 22px; }
-    .cert {
-      display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 10px 12px;
-      border: 1px solid var(--line); border-radius: 8px; color: #263245; font-size: 14px; font-weight: 600;
+    .snapshot-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+      border-top: 1px solid rgba(13, 139, 112, 0.18);
     }
-    .cert::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); flex: 0 0 auto; }
 
-    .snapshot { padding: 24px; background: var(--ink-soft); color: #fff; }
-    .snapshot h3 { margin: 0; font-family: var(--font-display); font-size: 18px; }
-    .snapshot dl { margin: 18px 0 0; }
-    .snapshot-row { display: flex; justify-content: space-between; gap: 20px; padding: 13px 0; border-top: 1px solid rgba(255,255,255,0.12); }
-    .snapshot dt { color: rgba(255,255,255,0.62); font-size: 14px; }
-    .snapshot dd { margin: 0; font-family: var(--font-mono); color: #fff; font-weight: 600; text-align: right; }
-
-    /* Contact */
-    .contact {
-      display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 30px; align-items: center;
-      padding: 36px; background: var(--ink); color: #fff;
+    .snapshot dt {
+      color: #426A61;
+      font-weight: 700;
     }
-    .contact h2 { max-width: 720px; color: #fff; }
-    .contact p { margin: 12px 0 0; color: rgba(255,255,255,0.68); }
-    .contact-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
 
-    .site-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13.5px; }
-    .footer-inner { width: min(1180px, calc(100% - 40px)); margin: 0 auto; display: flex; justify-content: space-between; gap: 20px; padding: 24px 0; }
+    .snapshot dd {
+      margin: 0;
+      color: var(--ink);
+      font-weight: 900;
+      text-align: right;
+    }
 
-    /* ---------- Responsive ---------- */
+    .testimonial {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: minmax(180px, 0.26fr) minmax(0, 1fr);
+      gap: 28px;
+      align-items: center;
+      padding: 30px;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .testimonial img {
+      width: 124px;
+      height: 124px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 30%;
+      border: 4px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .testimonial h3 {
+      color: #fff;
+      font-size: clamp(24px, 3.4vw, 38px);
+    }
+
+    .testimonial p {
+      margin: 14px 0 0;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: center;
+      padding: 38px;
+      background: var(--coral-soft);
+    }
+
+    .contact-panel h2 {
+      max-width: 780px;
+      color: var(--ink);
+      font-size: clamp(30px, 4vw, 50px);
+      font-weight: 900;
+    }
+
+    .contact-panel p {
+      margin: 14px 0 0;
+      color: #66483E;
+      font-weight: 700;
+    }
+
+    .contact-actions {
+      justify-content: flex-end;
+      margin: 0;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+
+    .footer-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px 0;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *,
+      *::before,
+      *::after {
+        transition-duration: .001ms !important;
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
     @media (max-width: 980px) {
-      .nav-links { display: none; }
-      .hero { background-position: 58% center; }
-      .hero-inner { grid-template-columns: 1fr; gap: 38px; padding: 56px 0 48px; }
-      .record-card { max-width: 480px; }
-      .metrics, .work-grid, .skills-wrap, .proof-grid, .about-grid,
-      .section-heading, .role-card, .contact, .footer-inner { grid-template-columns: 1fr; }
-      .contact-actions, .footer-inner { justify-content: flex-start; }
+      .nav-links,
+      .nav-cta {
+        position: fixed;
+        left: 20px;
+        right: 20px;
+        display: none;
+        background: #fff;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links {
+        top: 128px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px;
+        border-radius: var(--radius);
+      }
+
+      .nav-links a {
+        padding: 13px 12px;
+      }
+
+      .nav-cta {
+        top: 418px;
+        min-height: 50px;
+      }
+
+      .site-header.nav-open .nav-links,
+      .site-header.nav-open .nav-cta {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: inline-grid;
+        place-items: center;
+      }
+
+      .hero {
+        min-height: auto;
+        background-position: 63% center;
+      }
+
+      .hero-inner {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding: 62px 0 104px;
+      }
+
+      .hero-profile {
+        justify-self: start;
+        max-width: 430px;
+      }
+
+      .proof-strip,
+      .feature-grid,
+      .skills-wrap {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .proof-item:nth-child(2) {
+        border-right: 0;
+      }
+
+      .proof-item:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .section-heading,
+      .about-grid,
+      .role-card,
+      .proof-grid,
+      .testimonial,
+      .contact-panel,
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-actions {
+        justify-content: flex-start;
+      }
     }
 
-    @media (max-width: 620px) {
-      .nav, .hero-inner, main, .footer-inner { width: calc(100vw - 28px); }
-      .hero { background-position: 62% center; }
-      h1 { font-size: 32px; }
-      .hero-lead { font-size: 16px; }
-      .hero-actions .button, .contact-actions .button { width: 100%; }
-      .about-panel, .role-card, .contact, .cert-grid, .snapshot, .skill-group, .work-card { padding: 20px; }
-      .cert-grid { grid-template-columns: 1fr; }
-      section { margin-bottom: 56px; }
+    @media (max-width: 640px) {
+      .top-strip-inner,
+      .nav,
+      .hero-inner,
+      .section-inner,
+      .proof-strip,
+      .footer-inner {
+        width: calc(100vw - 28px);
+      }
+
+      .top-strip-inner {
+        min-height: 48px;
+        font-size: 12px;
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .brand {
+        max-width: calc(100vw - 98px);
+      }
+
+      .brand span:last-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .brand small {
+        display: none;
+      }
+
+      .nav-links {
+        top: 116px;
+        left: 14px;
+        right: 14px;
+      }
+
+      .nav-cta {
+        top: 406px;
+        left: 14px;
+        right: 14px;
+      }
+
+      .hero {
+        background:
+          linear-gradient(90deg, rgba(20, 33, 61, 0.97), rgba(20, 33, 61, 0.78)),
+          url("assets/salesforce-hero.png") 64% center / cover no-repeat,
+          var(--ink);
+      }
+
+      .hero-inner {
+        padding: 48px 0 88px;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .button,
+      .hero-actions .button,
+      .contact-actions .button {
+        width: 100%;
+      }
+
+      .proof-strip,
+      .feature-grid,
+      .skills-wrap,
+      .cert-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .proof-item {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .proof-item:last-child {
+        border-bottom: 0;
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .about-copy,
+      .focus-panel,
+      .feature-card-content,
+      .skill-group,
+      .role-card,
+      .cert-grid,
+      .snapshot,
+      .testimonial,
+      .contact-panel {
+        padding: 22px;
+      }
+
+      .feature-media {
+        min-height: 126px;
+      }
+
+      .testimonial img {
+        width: 92px;
+        height: 92px;
+      }
+
+      .footer-inner {
+        display: grid;
+      }
     }
   </style>
+  <noscript>
+    <style>
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    </style>
+  </noscript>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <div class="top-strip">
+    <div class="top-strip-inner">
+      <span>Open for Salesforce Developer and Senior Salesforce Developer roles</span>
+      <a href="mailto:gokulkrishnant99@gmail.com">Start a conversation</a>
+    </div>
+  </div>
+
   <header class="site-header">
     <nav class="nav" aria-label="Primary navigation">
       <a class="brand" href="#top" aria-label="Gokul Krishnan T home">
         <span class="brand-mark">
           <img src="assets/gokul-profile-professional.png" alt="" />
         </span>
-        <span>Gokul Krishnan T</span>
+        <span>Gokul Krishnan T <small>Salesforce Developer</small></span>
       </a>
-      <div class="nav-links">
+
+      <div class="nav-links" id="navLinks">
         <a href="#about">About</a>
+        <a href="#work">Work</a>
         <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#contact">Contact</a>
+        <a href="#certifications">Proof</a>
       </div>
+
+      <a class="nav-cta" href="#contact">Contact</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation">
+        <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
     </nav>
   </header>
 
   <section class="hero" id="top">
     <div class="hero-inner">
-      <div class="hero-content">
-        <div class="eyebrow">Open to Bangalore, Coimbatore, Chennai and remote roles</div>
-        <h1>Salesforce Developer building CRM, portals, integrations and AI automation.</h1>
-        <p class="hero-lead">I design and ship Apex, LWC and Experience Cloud solutions for real estate CRM and healthcare platforms — from lead automation to document workflows to AI-assisted service journeys.</p>
+      <div class="hero-content reveal">
+        <p class="kicker">Salesforce CRM, portals, automation and AI</p>
+        <h1>Gokul Krishnan T</h1>
+        <p class="hero-lead">I build practical Salesforce solutions for real estate and healthcare teams: Apex services, Lightning Web Components, Experience Cloud portals, integrations, document workflows and AI-assisted service journeys.</p>
         <div class="hero-actions">
           <a class="button primary" href="mailto:gokulkrishnant99@gmail.com">Email Me</a>
           <a class="button secondary" href="https://www.linkedin.com/in/gokulkrishnant/" target="_blank" rel="noreferrer">LinkedIn Profile</a>
         </div>
-        <div class="hero-chips" aria-label="Quick facts">
-          <span><strong>3+ yrs</strong> Salesforce delivery</span>
-          <span><strong>8x</strong> Salesforce certified</span>
-          <span><strong>558+</strong> Trailhead badges</span>
-          <span><strong>220k+</strong> Trailhead points</span>
-        </div>
       </div>
 
-      <aside class="record-card" aria-label="Profile summary">
-        <div class="profile-photo">
-          <img src="assets/gokul-profile-professional.png" alt="Gokul Krishnan T" />
-        </div>
-        <div class="record-card-top">
-          <div>
-            <h3>Gokul Krishnan T</h3>
-            <p>Salesforce Developer</p>
+      <aside class="hero-profile reveal" aria-label="Profile summary">
+        <img src="assets/gokul-profile-professional.png" alt="Gokul Krishnan T" />
+        <div class="profile-copy">
+          <h2>Salesforce Developer</h2>
+          <p>3+ years delivering Apex, LWC, Experience Cloud, integrations and Agentforce work.</p>
+          <div class="profile-pills" aria-label="Core strengths">
+            <span>Apex</span>
+            <span>LWC</span>
+            <span>Experience Cloud</span>
+            <span>Agentforce</span>
           </div>
-        </div>
-        <dl class="record-fields">
-          <div class="record-row">
-            <dt>Experience</dt>
-            <dd>3+ years</dd>
-          </div>
-          <div class="record-row">
-            <dt>Certifications</dt>
-            <dd>8x Salesforce</dd>
-          </div>
-          <div class="record-row">
-            <dt>Trailhead rank</dt>
-            <dd>Five Star Ranger</dd>
-          </div>
-          <div class="record-row">
-            <dt>Location</dt>
-            <dd>Coimbatore, IN</dd>
-          </div>
-          <div class="record-row">
-            <dt>Status</dt>
-            <dd class="status">Open to opportunities</dd>
-          </div>
-        </dl>
-        <div class="record-badges" aria-label="Core strengths">
-          <span>Apex</span>
-          <span>LWC</span>
-          <span>Experience Cloud</span>
-          <span>Agentforce</span>
         </div>
       </aside>
     </div>
   </section>
 
-  <main>
-    <section id="about">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">About</p>
-          <h2>Developer who connects business workflows with reliable Salesforce architecture.</h2>
-        </div>
-        <p class="section-copy">My work spans real estate CRM, healthcare onboarding, customer portals, automation, integrations and AI-assisted service experiences.</p>
+  <main id="main">
+    <div class="proof-strip reveal" aria-label="Professional proof points">
+      <div class="proof-item">
+        <strong>3+</strong>
+        <span>Years Salesforce delivery</span>
       </div>
-
-      <div class="about-grid">
-        <div class="panel about-panel">
-          <p>I build Salesforce solutions that are practical for users and maintainable for teams: Apex services, Lightning Web Components, Flows, Experience Cloud portals, API integrations, document workflows and production support.</p>
-          <p>At Dotts Tech, I work on real estate CRM platforms with lead management, buyer and agent portals, booking journeys, EOI and CIF processes, QuickBooks sync, Identfo KYC verification, DocuSign flows and automated approvals.</p>
-          <p>Earlier at Value Health Inc, I delivered Health Cloud and Experience Cloud features for patient onboarding, consent workflows, CMS-driven content and an Agentforce plus OpenAI chatbot that reduced onboarding time by 60%.</p>
-        </div>
-
-        <aside class="panel availability">
-          <h3>Current Focus</h3>
-          <p>Salesforce Developer and Senior Salesforce Developer roles where I can own Apex, LWC, Experience Cloud, Sales Cloud, Health Cloud, AI automation and integrations.</p>
-          <div class="tag-list" aria-label="Preferred job locations">
-            <span class="tag">Bangalore</span>
-            <span class="tag">Coimbatore</span>
-            <span class="tag">Chennai</span>
-            <span class="tag">Remote</span>
-          </div>
-        </aside>
+      <div class="proof-item">
+        <strong>8x</strong>
+        <span>Salesforce certified</span>
       </div>
-    </section>
-
-    <section aria-labelledby="impact-title">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Impact</p>
-          <h2 id="impact-title">Business outcomes I have worked on.</h2>
-        </div>
-        <p class="section-copy">Clear automation, clean user journeys and integrations that remove manual effort from day-to-day operations.</p>
+      <div class="proof-item">
+        <strong>558+</strong>
+        <span>Trailhead badges</span>
       </div>
-
-      <div class="work-grid">
-        <article class="panel work-card">
-          <h3>Real Estate CRM</h3>
-          <p>Lead assignment, property listing workflows, buyer onboarding, booking operations, payment records, document generation and approval automation.</p>
-        </article>
-        <article class="panel work-card">
-          <h3>Patient Experience</h3>
-          <p>Health Cloud onboarding, consent management, insurance workflows, prescription updates, care program journeys and patient portal components.</p>
-        </article>
-        <article class="panel work-card">
-          <h3>AI and Integrations</h3>
-          <p>Agentforce chatbot flows, OpenAI-powered guidance, Salesforce CMS delivery, QuickBooks sync, Identfo KYC and DocuSign signing journeys.</p>
-        </article>
+      <div class="proof-item">
+        <strong>220k+</strong>
+        <span>Trailhead points</span>
       </div>
-    </section>
+    </div>
 
-    <section id="skills">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Core Skills</p>
-          <h2>Salesforce platform skills with real implementation depth.</h2>
-        </div>
-        <p class="section-copy">A focused stack across custom development, declarative automation, portals, APIs, DevOps and AI features.</p>
-      </div>
-
-      <div class="skills-wrap">
-        <div class="panel skill-group">
-          <h3>Platform</h3>
-          <ul>
-            <li>Apex, Triggers and SOQL</li>
-            <li>Lightning Web Components</li>
-            <li>Flows and approvals</li>
-            <li>Batch, Queueable and Scheduled Apex</li>
-          </ul>
-        </div>
-        <div class="panel skill-group">
-          <h3>Clouds</h3>
-          <ul>
-            <li>Sales Cloud</li>
-            <li>Experience Cloud</li>
-            <li>Health Cloud</li>
-            <li>Data Cloud</li>
-          </ul>
-        </div>
-        <div class="panel skill-group">
-          <h3>AI and Automation</h3>
-          <ul>
-            <li>Agentforce</li>
-            <li>Prompt Builder</li>
-            <li>OpenAI integrations</li>
-            <li>Guided service journeys</li>
-          </ul>
-        </div>
-        <div class="panel skill-group">
-          <h3>Integrations</h3>
-          <ul>
-            <li>REST and SOAP APIs</li>
-            <li>QuickBooks API</li>
-            <li>DocuSign flows</li>
-            <li>Git and CI/CD</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="experience">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Experience</p>
-          <h2>Recent Salesforce work.</h2>
-        </div>
-        <p class="section-copy"></p>
-      </div>
-
-      <div class="timeline">
-        <article class="panel role-card">
-          <div class="role-meta">
-            <strong>Current</strong>
-            Dotts Tech<br>
-            Salesforce Developer<br>
-            Coimbatore
-          </div>
+    <section class="section" id="about">
+      <div class="section-inner">
+        <div class="section-heading reveal">
           <div>
-            <h3>Real estate CRM, portals and finance integrations</h3>
-            <p>Building Sales Cloud and Experience Cloud solutions for sales, buyer onboarding and back-office operations.</p>
+            <p class="section-kicker">About</p>
+            <h2>CRM experiences that feel clear for users and reliable for teams.</h2>
+          </div>
+          <p class="section-copy">My work connects business operations with maintainable Salesforce architecture across sales, service, portals, finance and onboarding flows.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-copy reveal">
+            <p>I build Salesforce solutions that are practical in production: Apex services, Lightning Web Components, Flows, approvals, batch jobs, Experience Cloud portals, API integrations and document workflows.</p>
+            <p>At Dotts Tech, I work on real estate CRM platforms covering lead management, buyer and agent portals, booking journeys, EOI and CIF processes, QuickBooks sync, Identfo KYC verification, DocuSign flows and approval automation.</p>
+            <p>Earlier at Value Health Inc, I delivered Health Cloud and Experience Cloud features for patient onboarding, consent workflows, CMS-driven content and an Agentforce plus OpenAI chatbot that reduced onboarding time by 60%.</p>
+          </div>
+
+          <aside class="focus-panel reveal">
+            <h3>Current Focus</h3>
+            <p>Salesforce Developer and Senior Salesforce Developer roles where I can own Apex, LWC, Experience Cloud, Sales Cloud, Health Cloud, AI automation and integrations.</p>
+            <div aria-label="Preferred job locations">
+              <span class="tag">Bangalore</span>
+              <span class="tag">Coimbatore</span>
+              <span class="tag">Chennai</span>
+              <span class="tag">Remote</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="work">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-kicker">Work</p>
+            <h2>Focused Salesforce outcomes.</h2>
+          </div>
+          <p class="section-copy">A portfolio shape inspired by product sites: clear outcomes, quick scanning and simple movement between sections.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <div class="feature-media">
+              <div class="feature-icon" aria-hidden="true">01</div>
+            </div>
+            <div class="feature-card-content">
+              <h3>Real Estate CRM</h3>
+              <p>Lead assignment, property listing workflows, buyer onboarding, booking operations, payment records, document generation and approval automation.</p>
+            </div>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-media">
+              <div class="feature-icon" aria-hidden="true">02</div>
+            </div>
+            <div class="feature-card-content">
+              <h3>Patient Experience</h3>
+              <p>Health Cloud onboarding, consent management, insurance workflows, prescription updates, care program journeys and patient portal components.</p>
+            </div>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-media">
+              <div class="feature-icon" aria-hidden="true">03</div>
+            </div>
+            <div class="feature-card-content">
+              <h3>AI and Integrations</h3>
+              <p>Agentforce chatbot flows, OpenAI-powered guidance, Salesforce CMS delivery, QuickBooks sync, Identfo KYC and DocuSign signing journeys.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-kicker">Skills</p>
+            <h2>Salesforce platform skills with real implementation depth.</h2>
+          </div>
+          <p class="section-copy">A focused stack across custom development, declarative automation, portals, APIs, DevOps and AI features.</p>
+        </div>
+
+        <div class="skills-wrap">
+          <div class="skill-group reveal">
+            <h3>Platform</h3>
             <ul>
-              <li>Delivered LWC and portal experiences for agents, buyers and internal sales teams.</li>
-              <li>Automated lead management, EOI, CIF, booking, notification, approval and document workflows.</li>
-              <li>Integrated QuickBooks, Identfo KYC and DocuSign using Salesforce automation and API patterns.</li>
+              <li>Apex, Triggers and SOQL</li>
+              <li>Lightning Web Components</li>
+              <li>Flows and approvals</li>
+              <li>Batch, Queueable and Scheduled Apex</li>
             </ul>
           </div>
-        </article>
-
-        <article class="panel role-card">
-          <div class="role-meta">
-            <strong>2023 - 2025</strong>
-            Value Health Inc<br>
-            Salesforce Developer<br>
-            Coimbatore
-          </div>
-          <div>
-            <h3>Health Cloud, Experience Cloud and AI onboarding</h3>
-            <p>Worked on patient-facing and operations-focused Salesforce healthcare solutions.</p>
+          <div class="skill-group reveal">
+            <h3>Clouds</h3>
             <ul>
-              <li>Created onboarding, consent, prescription, insurance and care program automation.</li>
-              <li>Built Agentforce and OpenAI-assisted chatbot journeys that reduced onboarding time by 60%.</li>
-              <li>Integrated Salesforce CMS with Experience Cloud to reduce content management effort by 80%.</li>
+              <li>Sales Cloud</li>
+              <li>Experience Cloud</li>
+              <li>Health Cloud</li>
+              <li>Data Cloud</li>
             </ul>
           </div>
-        </article>
-
-        <article class="panel role-card">
-          <div class="role-meta">
-            <strong>2023</strong>
-            Adapt IQ<br>
-            Salesforce Developer Intern<br>
-            Coimbatore
-          </div>
-          <div>
-            <h3>Salesforce fundamentals and delivery practice</h3>
-            <p>Built strong implementation basics across data models, automation, Apex, LWC and user access.</p>
+          <div class="skill-group reveal">
+            <h3>AI and Automation</h3>
             <ul>
-              <li>Worked on timesheet and property management use cases with measurable process improvements.</li>
-              <li>Built hands-on skill in Flows, triggers, profiles, data modeling and Lightning development.</li>
+              <li>Agentforce</li>
+              <li>Prompt Builder</li>
+              <li>OpenAI integrations</li>
+              <li>Guided service journeys</li>
             </ul>
           </div>
-        </article>
+          <div class="skill-group reveal">
+            <h3>Integrations</h3>
+            <ul>
+              <li>REST and SOAP APIs</li>
+              <li>QuickBooks API</li>
+              <li>DocuSign flows</li>
+              <li>Git and CI/CD</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="certifications">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Proof</p>
-          <h2>Certifications and learning record.</h2>
-        </div>
-        <p class="section-copy">8 Salesforce credentials plus a Five Star Ranger Trailhead profile with 558+ badges and 220k+ points.</p>
-      </div>
-
-      <div class="proof-grid">
-        <div class="panel cert-grid" aria-label="Salesforce certifications">
-          <div class="cert">Platform Developer I</div>
-          <div class="cert">Platform Developer II</div>
-          <div class="cert">JavaScript Developer I</div>
-          <div class="cert">Salesforce Administrator</div>
-          <div class="cert">Experience Cloud Consultant</div>
-          <div class="cert">Data Cloud Consultant</div>
-          <div class="cert">AI Specialist</div>
-          <div class="cert">AI Associate</div>
+    <section class="section alt" id="experience">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-kicker">Experience</p>
+            <h2>Recent Salesforce work.</h2>
+          </div>
+          <p class="section-copy">Production Salesforce delivery across real estate operations, healthcare journeys and portal-based customer experiences.</p>
         </div>
 
-        <aside class="panel snapshot">
-          <h3>Trailhead Snapshot</h3>
-          <dl>
-            <div class="snapshot-row">
-              <dt>Rank</dt>
-              <dd>Five Star Ranger</dd>
+        <div class="timeline">
+          <article class="role-card reveal">
+            <div class="role-meta">
+              <strong>Current</strong>
+              Dotts Tech<br>
+              Salesforce Developer<br>
+              Coimbatore
             </div>
-            <div class="snapshot-row">
-              <dt>Badges</dt>
-              <dd>558+</dd>
+            <div>
+              <h3>Real estate CRM, portals and finance integrations</h3>
+              <p>Building Sales Cloud and Experience Cloud solutions for sales, buyer onboarding and back-office operations.</p>
+              <ul>
+                <li>Delivered LWC and portal experiences for agents, buyers and internal sales teams.</li>
+                <li>Automated lead management, EOI, CIF, booking, notification, approval and document workflows.</li>
+                <li>Integrated QuickBooks, Identfo KYC and DocuSign using Salesforce automation and API patterns.</li>
+              </ul>
             </div>
-            <div class="snapshot-row">
-              <dt>Points</dt>
-              <dd>220k+</dd>
+          </article>
+
+          <article class="role-card reveal">
+            <div class="role-meta">
+              <strong>2023 - 2025</strong>
+              Value Health Inc<br>
+              Salesforce Developer<br>
+              Coimbatore
             </div>
-          </dl>
-        </aside>
+            <div>
+              <h3>Health Cloud, Experience Cloud and AI onboarding</h3>
+              <p>Worked on patient-facing and operations-focused Salesforce healthcare solutions.</p>
+              <ul>
+                <li>Created onboarding, consent, prescription, insurance and care program automation.</li>
+                <li>Built Agentforce and OpenAI-assisted chatbot journeys that reduced onboarding time by 60%.</li>
+                <li>Integrated Salesforce CMS with Experience Cloud to reduce content management effort by 80%.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="role-card reveal">
+            <div class="role-meta">
+              <strong>2023</strong>
+              Adapt IQ<br>
+              Salesforce Developer Intern<br>
+              Coimbatore
+            </div>
+            <div>
+              <h3>Salesforce fundamentals and delivery practice</h3>
+              <p>Built strong implementation basics across data models, automation, Apex, LWC and user access.</p>
+              <ul>
+                <li>Worked on timesheet and property management use cases with measurable process improvements.</li>
+                <li>Built hands-on skill in Flows, triggers, profiles, data modeling and Lightning development.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section class="panel contact" id="contact">
-      <div>
-        <p class="section-kicker">Contact</p>
-        <h2>Available for Salesforce Developer and Senior Salesforce Developer opportunities.</h2>
-        <p>Email: <a href="mailto:gokulkrishnant99@gmail.com">gokulkrishnant99@gmail.com</a></p>
+    <section class="section" id="certifications">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-kicker">Proof</p>
+            <h2>Certifications and learning record.</h2>
+          </div>
+          <p class="section-copy">8 Salesforce credentials plus a Five Star Ranger Trailhead profile with 558+ badges and 220k+ points.</p>
+        </div>
+
+        <div class="proof-grid">
+          <div class="cert-grid reveal" aria-label="Salesforce certifications">
+            <div class="cert">Platform Developer I</div>
+            <div class="cert">Platform Developer II</div>
+            <div class="cert">JavaScript Developer I</div>
+            <div class="cert">Salesforce Administrator</div>
+            <div class="cert">Experience Cloud Consultant</div>
+            <div class="cert">Data Cloud Consultant</div>
+            <div class="cert">AI Specialist</div>
+            <div class="cert">AI Associate</div>
+          </div>
+
+          <aside class="snapshot reveal">
+            <h3>Trailhead Snapshot</h3>
+            <dl>
+              <div class="snapshot-row">
+                <dt>Rank</dt>
+                <dd>Five Star Ranger</dd>
+              </div>
+              <div class="snapshot-row">
+                <dt>Badges</dt>
+                <dd>558+</dd>
+              </div>
+              <div class="snapshot-row">
+                <dt>Points</dt>
+                <dd>220k+</dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+
+        <div class="testimonial reveal">
+          <img src="assets/gokul-profile.png" alt="Gokul Krishnan T" />
+          <div>
+            <h3>Built for clean delivery, not just clean screens.</h3>
+            <p>I care about the full path from business requirement to usable Salesforce workflow: data model, automation, permissions, UI, integrations and support after release.</p>
+          </div>
+        </div>
       </div>
-      <div class="contact-actions">
-        <a class="button primary" href="mailto:gokulkrishnant99@gmail.com">Send Email</a>
-        <a class="button secondary" href="https://www.linkedin.com/in/gokulkrishnant/" target="_blank" rel="noreferrer">View LinkedIn</a>
+    </section>
+
+    <section class="section alt" id="contact">
+      <div class="section-inner">
+        <div class="contact-panel reveal">
+          <div>
+            <p class="section-kicker">Contact</p>
+            <h2>Available for Salesforce Developer and Senior Salesforce Developer opportunities.</h2>
+            <p>Email: <a href="mailto:gokulkrishnant99@gmail.com">gokulkrishnant99@gmail.com</a></p>
+          </div>
+          <div class="contact-actions">
+            <a class="button dark" href="mailto:gokulkrishnant99@gmail.com">Send Email</a>
+            <a class="button light" href="https://www.linkedin.com/in/gokulkrishnant/" target="_blank" rel="noreferrer">View LinkedIn</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -833,5 +1409,64 @@
       <span>Apex | LWC | Experience Cloud | Agentforce | Integrations</span>
     </div>
   </footer>
+
+  <script>
+    const header = document.querySelector(".site-header");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelectorAll(".nav-links a");
+    const progress = document.querySelector(".scroll-progress");
+    const revealItems = document.querySelectorAll(".reveal");
+    const sections = document.querySelectorAll("main section[id]");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = header.classList.toggle("nav-open");
+      document.body.classList.toggle("menu-open", isOpen);
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        header.classList.remove("nav-open");
+        document.body.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation");
+      });
+    });
+
+    const setProgress = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = max > 0 ? window.scrollY / max : 0;
+      progress.style.transform = `scaleX(${ratio})`;
+    };
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach((item) => revealObserver.observe(item));
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach((link) => {
+            link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`);
+          });
+        });
+      }, { rootMargin: "-35% 0px -55% 0px" });
+
+      sections.forEach((section) => sectionObserver.observe(section));
+    } else {
+      revealItems.forEach((item) => item.classList.add("visible"));
+    }
+    window.addEventListener("scroll", setProgress, { passive: true });
+    setProgress();
+  </script>
 </body>
 </html>
